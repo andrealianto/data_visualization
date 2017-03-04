@@ -50,23 +50,33 @@
             .enter()
             .append("circle");
 
-          debugger
-
+          // Find range of time column
           var time_extent = d3.extent(data, function(d){
             return d['date'];
           });
 
+          // Find range of attendance column
           var count_extent = d3.extent(data, function(d){
             return d['attendance'];
           });
 
+          // Create x-axis scale mapping dates -> pixels
           var time_scale = d3.time.scale()
             .range([margin, width])
             .domain(time_extent);
 
+          // Create y-axis scale mapping attendance
           var count_scale = d3.scale.linear()
             .range([height, margin]) //because SVG has an inverted coordinate plane
             .domain(count_extent);
+
+          var time_axis = d3.svg.axis()
+            .scale(time_scale)
+            .ticks(d3.time.years, 2);
+
+          var count_axis = d3.svg.axis()
+            .scale(count_scale)
+            .orient("left");
 
           var x = myChart.addTimeAxis("x", "year");
           myChart.addMeasureAxis("y", "attendance");
