@@ -9,6 +9,12 @@
       circle.dimple-series-1 {
         fill: red;
       }
+
+      h2 {
+        text-align: center;
+      }
+
+
     </style>
 
     <script type="text/javascript">
@@ -22,6 +28,10 @@
           var margin = 75,
               width = 1400 - margin,
               height = 600 - margin;
+
+          d3.select('body')
+            .append('h2')
+            .text("World Cup Attendance");
 
           var svg = d3.select("body")
             .append("svg")
