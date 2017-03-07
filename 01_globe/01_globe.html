@@ -4,6 +4,12 @@
   <meta charset="utf-8">
   <script src="http://d3js.org/d3.v3.min.js"></script>
     <style>
+        circle {
+            fill: orange;
+            stroke: black;
+            stroke-width: 0.7;
+            opacity: 0.7;
+        }
     </style>
     <script type="text/javascript">
       function draw(geo_data) {
@@ -20,8 +26,8 @@
             .attr('class', 'map');
 
         var projection = d3.geo.mercator()
-                               .scale(170)
-                               .translate([width/2, height/1.5]);
+                               .scale(140)
+                               .translate([width/2, height/1.2]);
 
         var path = d3.geo.path().projection(projection);
 
@@ -109,11 +115,6 @@
                .attr('r', function(d){
                     return radius(d.values['attendance']);
                })
-               .attr('fill', 'rgb(247,148,32)')
-               .attr('stroke', 'black')
-               .attr('stroke-width', 0.7)
-               .attr('opacity', 0.7);
-
 
             // Update function
             function update(year) {
@@ -131,10 +132,6 @@
                     .attr('cx', function(d) { return d.values['x']; })
                     .attr('cy', function(d) { return d.values['y']; })
                     .attr('r', function(d) { return radius(d.values['attendance']); })
-                    .attr('fill', 'rgb(247,148,32)')
-                    .attr('stroke', 'black')
-                    .attr('stroke-width', 0.7)
-                    .attr('opacity', 0.7);
 
                 var countries = filtered[0].values['teams'];
 
