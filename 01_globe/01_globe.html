@@ -15,6 +15,18 @@
             text-align: center;
         }
 
+        div.years_buttons {
+            position: fixed;
+            top: 5px;
+            left: 50px;
+        }
+
+        div.years_buttons div {
+            background-color: rgb(251,201,127);
+            padding: 3px;
+            margin: 7px;
+        }
+
     </style>
     <script type="text/javascript">
       function draw(geo_data) {
@@ -144,6 +156,8 @@
                 // add new circles
                 circles.enter()
                     .append("circle")
+                    .transition()
+                    .duration(500)
                     .attr('cx', function(d) { return d.values['x']; })
                     .attr('cy', function(d) { return d.values['y']; })
                     .attr('r', function(d) { return radius(d.values['attendance']); })
@@ -160,6 +174,8 @@
                 }
 
                 svg.selectAll('path')
+                   .transition()
+                   .duration(500)
                    .style('fill', update_countries)
                    .style('stroke-width', update_countries);
             }
@@ -183,6 +199,15 @@
 
                 if(year_idx >= years.length) {
                     clearInterval(year_interval);
+
+                    var buttons = d3.select("body")
+                        .append("div")
+                        .attr("class", "years_buttons")
+                        .selectAll("div")
+                        .data(years)
+                        .enter()
+                        .append("div")
+                        .text(function(d) {return d;});
                 }
             }, 1000);
 
@@ -198,6 +223,8 @@
             return d;
         }, plot_points);
 
+
+
       };
       </script>
   </head>
@@ -208,6 +235,8 @@
     */
 
     d3.json("world_countries.json", draw);
+
+
   </script>
 </body>
 </html>
