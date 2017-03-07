@@ -151,7 +151,28 @@
                    .style('fill', update_countries)
                    .style('stroke-width', update_countries);
             }
-            debugger;
+
+            var years = [];
+
+            // find years in which World Cup was held
+            for(var i = 1930; i < 2015; i += 4){
+                if(i !== 1942 && i !== 1946){
+                    years.push(i);
+                };
+            }
+
+            var year_idx = 0;
+
+            // setInterval changes frame every defined interval, in this case every 1000ms
+            var year_interval = setInterval(function() {
+                update(years[year_idx]);
+
+                year_idx++;
+
+                if(year_idx >= years.length) {
+                    clearInterval(year_interval);
+                }
+            }, 1000);
 
         };
 
