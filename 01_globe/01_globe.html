@@ -122,11 +122,14 @@
                     return new Date(d['key']).getUTCFullYear() === year;
                 });
 
+                // update data bind
                 var circles = svg.selectAll('circle')
                                  .data(filtered, key_func);
 
+                // remove irrelevant circles - those not bound to any data
                 circles.exit().remove();
 
+                // add new circles
                 circles.enter()
                     .append("circle")
                     .attr('cx', function(d) { return d.values['x']; })
@@ -135,6 +138,7 @@
 
                 var countries = filtered[0].values['teams'];
 
+                // filter countries
                 function update_countries(d) {
                     if(countries.indexOf(d.properties.name) !== -1) {
                         return "rgb(9,157,217)";
