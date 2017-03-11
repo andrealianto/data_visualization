@@ -1,9 +1,79 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title></title>
-</head>
+    <head>
+        <meta charset="utf-8">
+        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+
+        <style>
+            .chart rect {
+                fill: steelblue;
+            }
+
+            .chart {
+                margin-left: 400px;
+                margin-right: 400px;
+            }
+
+        </style>
+    </head>
+
 <body>
 
+    <svg class = "chart"></svg>
+
+    <script type="text/javascript">
+        function draw(data) {
+            "use strict";
+
+            var margin = {top: 50, right: 400, bottom: 50, left: 400},
+                width = 1300 - margin.left - margin.right,
+                barHeight = 10,
+                height = 300 - margin.top - margin.bottom;
+
+            var chart = d3.select(".chart")
+                .attr("width", width)
+                .attr("height", barHeight * data.length);
+
+            var mathscore_max = d3.max(data, function(d){
+                return d.MATHAVE;
+            });
+
+            var mathscore_scale = d3.scale.linear()
+                .domain([0, mathscore_max])
+                .range([0, width]);
+
+            var bar = chart.selectAll("g")
+                .data(data)
+              .enter().append("g")
+                .attr("transform", function (d, i) {
+                    return "translate(0," + (i * barHeight) + ")";
+                });
+
+            bar.append("rect")
+                .attr("width", function(d) {
+                    return mathscore_scale(d.MATHAVE);
+                })
+                .attr("height", barHeight - 1);
+
+        }
+
+
+        // Load dataset
+        d3.csv("pisa2012_final.csv", function(d) {
+            return {
+                CNT : d.CNT,
+                OECD : d.OECD,
+                MATHAVE : +d.MATHAVE,
+                READAVE : +d.READAVE,
+                SCIEAVE : +d.SCIEAVE
+            };
+        }).get(function(error, data) {
+            console.log(data);
+            draw(data);
+        });
+
+
+    </script>
 </body>
 </html>
