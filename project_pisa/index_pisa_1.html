@@ -14,7 +14,7 @@
 
             #graphic {
                 width: 970px;
-                text-align: left;
+                float:left;
             }
 
             #chart-title {
@@ -169,7 +169,6 @@
 
             var xAxis = d3.svg.axis()
                               .scale(x)
-                              .tickSize(5)
                               .orient("bottom");
 
             var gx = svg.append("g")
@@ -192,6 +191,23 @@
                 .attr("x", 0)
                 .attr("width", function(d) {
                     return x(d.MATHAVE);
+                });
+
+            svg.selectAll("line.verticalGrid")
+                .data(x.ticks(4))
+                .enter()
+              .append("line")
+                .attr({
+                    "class":"verticalGrid",
+                    "x1" : function(d){ return x(d);},
+                    "x2" : function(d){ return x(d);},
+                    "y1" : margin.top + 10,
+                    "y2" : height-margin.bottom,
+                    "fill" : "none",
+                    "shape-rendering" : "crispEdges",
+                    "stroke" : "lightgrey",
+                    "opacity" : 0.7,
+                    "stroke-width" : "1px"
                 });
         }
 
