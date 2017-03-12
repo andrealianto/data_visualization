@@ -6,6 +6,10 @@
         <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
         <style>
+            #graphic {
+                text-align: center;
+            }
+
             .bar {
                 fill: steelblue;
             }
@@ -24,12 +28,16 @@
     </head>
 
 <body>
-
     <div id="graphic"></div>
 
     <script type="text/javascript">
         function draw(data) {
             "use strict";
+
+            // Sort bars based on value
+            data = data.sort(function (a,b){
+                return d3.descending(a.MATHAVE, b.MATHAVE);
+            });
 
             // Set up svg using margin conventions
             var margin = {
@@ -39,7 +47,7 @@
                 left: 120
             };
 
-            var width = 960 - margin.left - margin.right,
+            var width = 600 - margin.left - margin.right,
                 height = 800 - margin.top - margin.bottom;
 
             var svg = d3.select("#graphic")
