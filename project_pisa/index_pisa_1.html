@@ -222,9 +222,10 @@
                                 return x(d.MATHAVE);
                             });
 
-                        data = data.sort(function (a,b){
-                            return d3.descending(a.MATHAVE, b.MATHAVE);
-                        });
+                        // Update country mapping on y-axis
+                        var y0 = y.domain(data.sort(function (a,b){return d3.descending(a.MATHAVE,b.MATHAVE);})
+                            .map(function(d) {return d.CNT;}))
+                              .copy();
 
                         break;
 
@@ -240,30 +241,10 @@
                                 return x(d.READAVE);
                             });
 
-                        /* Animate bar chart sorting. Steps:
-                           1. Obtain new country mapping on y-axis
-                           2. Sort bar chart
-                           3. Sort country using the new country mapping */
-
+                        // Update country mapping on y-axis
                         var y0 = y.domain(data.sort(function (a,b){return d3.descending(a.READAVE,b.READAVE);})
                             .map(function(d) {return d.CNT;}))
                               .copy();
-
-                        var transition = svg.transition()
-                                            .duration(750);
-
-                        var delay = function(d, i) {return i * 50;};
-
-                        transition.selectAll(".bar")
-                            .delay(delay)
-                            .attr("y", function(d) {
-                                return y0(d.CNT);
-                            });
-
-                        transition.select(".y.axis")
-                            .call(yAxis)
-                          .selectAll("g")
-                            .delay(delay);
 
                         break;
 
@@ -282,12 +263,33 @@
                                 return x(d.SCIEAVE);
                             });
 
-                        data = data.sort(function (a,b){
-                            return d3.descending(a.SCIEAVE, b.SCIEAVE);
-                        });
+                        // Update country mapping on y-axis
+                        var y0 = y.domain(data.sort(function (a,b){return d3.descending(a.SCIEAVE,b.SCIEAVE);})
+                            .map(function(d) {return d.CNT;}))
+                              .copy();
 
                         break;
                 }
+
+                /* Animate bar chart sorting. Steps:
+                   1. Sort bar chart
+                   2. Sort country using the new country mapping */
+
+                var transition = svg.transition()
+                                    .duration(750);
+
+                var delay = function(d, i) {return i * 50;};
+
+                transition.selectAll(".bar")
+                    .delay(delay)
+                    .attr("y", function(d) {
+                        return y0(d.CNT);
+                    });
+
+                transition.select(".y.axis")
+                    .call(yAxis)
+                  .selectAll("g")
+                    .delay(delay);
 
 
             }
