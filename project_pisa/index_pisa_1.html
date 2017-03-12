@@ -62,7 +62,7 @@
                 color: white;
             }
 
-            .chart-stepPrev{
+            #chart-stepPrev{
                 margin-right: 4px;
             }
 
@@ -93,8 +93,8 @@
 
         <div class="button-row-wrapper">
             <div id="button-row">
-                <button class="chart-stepButton chart-stepPrev">Prev</buttom>
-                <button class="chart-stepButton chart-stepNext">Next</button>
+                <button class="chart-stepButton" id="chart-stepPrev">Prev</buttom>
+                <button class="chart-stepButton" id="chart-stepNext">Next</button>
 
             </div>
         </div>
@@ -106,6 +106,7 @@
         function draw(data) {
             "use strict";
 
+            // Add chart title
             d3.select("#graphic")
                 .append("h2")
                 .attr("id","chart-title")
@@ -126,6 +127,9 @@
 
             var width = 600 - margin.left - margin.right,
                 height = 1000 - margin.top - margin.bottom;
+
+            // Count page number
+            var page = 1;
 
             var svg = d3.select("#graphic")
               .append("svg")
@@ -200,6 +204,85 @@
                     "opacity" : 0.7,
                     "stroke-width" : "1px"
                 });
+
+            function update() {
+                switch(page){
+                    case 1:
+                        d3.select("#chart-title")
+                            .text("Performance in Mathematics")
+
+                        // update bar charts to show maths score
+                        svg.selectAll("rect")
+                            .attr("y", function(d){
+                                return y(d.CNT);
+                            })
+                            .attr("height", y.rangeBand())
+                            .attr("x", 0)
+                            .attr("width", function(d) {
+                                return x(d.MATHAVE);
+                            });
+
+                        data = data.sort(function (a,b){
+                            return d3.descending(a.MATHAVE, b.MATHAVE);
+                        });
+
+                        break;
+
+                    case 2:
+                        d3.select("#chart-title")
+                            .text("Performance in Reading")
+
+                        // update bar charts to show reading scores
+                        svg.selectAll("rect")
+                            .attr("y", function(d){
+                                return y(d.CNT);
+                            })
+                            .attr("height", y.rangeBand())
+                            .attr("x", 0)
+                            .attr("width", function(d) {
+                                return x(d.READAVE);
+                            });
+
+                        data = data.sort(function (a,b){
+                            return d3.descending(a.READAVE, b.READAVE);
+                        });
+
+                        break;
+
+                    case 3:
+                        d3.select("#chart-title")
+                            .text("Performance in Science")
+
+                        // update bar charts to show science scores
+                        svg.selectAll("rect")
+                            .attr("y", function(d){
+                                return y(d.CNT);
+                            })
+                            .attr("height", y.rangeBand())
+                            .attr("x", 0)
+                            .attr("width", function(d) {
+                                return x(d.SCIEAVE);
+                            });
+
+                        data = data.sort(function (a,b){
+                            return d3.descending(a.SCIEAVE, b.SCIEAVE);
+                        });
+
+                        break;
+                }
+
+
+            }
+
+            d3.select("#chart-stepNext").on("click", function(){
+                page++;
+                update()
+            })
+
+            d3.select("#chart-stepPrev").on("click", function(){
+                page--;
+                update()
+            })
         }
 
 
