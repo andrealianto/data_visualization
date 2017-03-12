@@ -51,7 +51,7 @@
             var margin = {
                 top: 15,
                 right: 25,
-                bottom: 15,
+                bottom: 30,
                 left: 120
             };
 
@@ -88,6 +88,16 @@
             var gy = svg.append("g")
                 .attr("class", "y axis")
                 .call(yAxis);
+
+            var xAxis = d3.svg.axis()
+                              .scale(x)
+                              .tickSize(5)
+                              .orient("bottom");
+
+            var gx = svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + (height - margin.bottom) +")")
+                .call(xAxis);
 
             var bars = svg.selectAll(".bar")
                 .data(data)
