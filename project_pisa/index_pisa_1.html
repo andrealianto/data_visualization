@@ -6,14 +6,72 @@
         <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
         <style>
-            #chart_title {
-                font: 24px sans-serif;
-                font-weight: bold;
-                text-align: center;
+            #frame {
+                width: 972px;
+                margin: 0 auto;
+                text-align: left;
             }
 
             #graphic {
-                text-align: center;
+                width: 970px;
+                text-align: left;
+            }
+
+            #chart-title {
+                font: 30px helvetica;
+            }
+
+            p {
+                font: 12px helvetica;
+            }
+
+            .button-row-wrapper{
+                position: relative;
+                font-family: helvetica;
+            }
+
+            #button-row {
+                position: relative;
+                height: 28px;
+                margin: 8px 0 0;
+                padding: 8px 0 0;
+            }
+
+            .chart-stepButton{
+                padding: 0 12px;
+                margin: 0;
+                display: block;
+                background: steelblue;
+                color: white;
+                text-decoration: none;
+                border-radius: 2px;
+                font-size: 14px;
+                line-height: 30px;
+                width: 30px;
+                outline: none;
+                float: left;
+            }
+
+            .chart-stepPrev{
+                margin-right: 4px;
+            }
+
+            .chart-steps {
+                margin: 0 0 0 10px;
+                padding: 0;
+                display: block;
+                float: left;
+            }
+
+            .chart-step {
+                font-size: 13px;
+                background-image: none;
+                list-style-type: none;
+                cursor: pointer;
+                display: block;
+                float: left;
+                padding: 0px 7px;
+                margin: 7px 0;
             }
 
             .bar {
@@ -34,9 +92,29 @@
     </head>
 
 <body>
-    <h2 id="chart_title">Math Scores</h2>
 
-    <div id="graphic"></div>
+    <div id="frame">
+        <h2 id="chart-title">PISA 2012: The Results</h2>
+        <p>The Programme for International Student Assessment (PISA) is a triennial international survey which aims to evaluate education systems worldwide by assessing the competencies of 15-year-old students in mathematics, science, and reading.</p>
+        <p>In 2012, around 510 000 students aged 15-16 years old from 65 countries participated, representing about 28 million 15-year-olds globally.</p>
+
+        <div class="button-row-wrapper">
+            <div id="button-row">
+                <a href="#" class="chart-stepButton chart-stepPrev">Prev</a>
+                <a href="#" class="chart-stepButton chart-stepNext">Next</a>
+                <ul class="chart-steps">
+                    <li class="chart-step"><a href="#">1</a></li>
+                    <li class="chart-step"><a href="#">2</a></li>
+                    <li class="chart-step"><a href="#">3</a></li>
+                    <li class="chart-step"><a href="#">4</a></li>
+                    <li class="chart-step"><a href="#">5</a></li>
+                </ul>
+
+            </div>
+        </div>
+
+        <div id="graphic"></div>
+    </div>
 
     <script type="text/javascript">
         function draw(data) {
@@ -63,7 +141,7 @@
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
               .append("g")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                .attr("transform", "translate(" + margin.left + ",0)");
 
             var mathscore_max = d3.max(data, function(d){
                 return d.MATHAVE;
