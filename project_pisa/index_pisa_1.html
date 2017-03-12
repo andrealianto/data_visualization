@@ -2,17 +2,22 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <title>Bar Chart</title>
         <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
 
         <style>
-            .chart rect {
+            .bar {
                 fill: steelblue;
             }
 
-            .chart {
-                margin-left: 400px;
-                margin-right: 400px;
+            .axis path,
+            .axis line {
+                fill: none;
+                stroke: none;
+            }
+
+            .axis text {
+                font: 10px sans-serif;
             }
 
         </style>
@@ -20,42 +25,70 @@
 
 <body>
 
-    <svg class = "chart"></svg>
+    <div id="graphic"></div>
 
     <script type="text/javascript">
         function draw(data) {
             "use strict";
 
-            var margin = {top: 50, right: 400, bottom: 50, left: 400},
-                width = 1300 - margin.left - margin.right,
-                barHeight = 10,
-                height = 300 - margin.top - margin.bottom;
+            // Set up svg using margin conventions
+            var margin = {
+                top: 15,
+                right: 25,
+                bottom: 15,
+                left: 120
+            };
 
-            var chart = d3.select(".chart")
-                .attr("width", width)
-                .attr("height", barHeight * data.length);
+            var width = 960 - margin.left - margin.right,
+                height = 800 - margin.top - margin.bottom;
+
+            var svg = d3.select("#graphic")
+              .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+              .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
             var mathscore_max = d3.max(data, function(d){
                 return d.MATHAVE;
             });
 
-            var mathscore_scale = d3.scale.linear()
+            var x = d3.scale.linear()
                 .domain([0, mathscore_max])
                 .range([0, width]);
 
-            var bar = chart.selectAll("g")
+            var y = d3.scale.ordinal()
+                .domain(data.map(function(d) {
+                    return d.CNT;
+                }))
+                .rangeRoundBands([0, height], 0.1);
+
+            // Make y axis to show bar names
+            var yAxis = d3.svg.axis()
+                              .scale(y)
+                              .tickSize(0)
+                              .orient("left");
+
+            var gy = svg.append("g")
+                .attr("class", "y axis")
+                .call(yAxis);
+
+            var bars = svg.selectAll(".bar")
                 .data(data)
-              .enter().append("g")
-                .attr("transform", function (d, i) {
-                    return "translate(0," + (i * barHeight) + ")";
-                });
+                .enter()
+                .append("g");
 
-            bar.append("rect")
-                .attr("width", function(d) {
-                    return mathscore_scale(d.MATHAVE);
+            // append rects
+            bars.append("rect")
+                .attr("class", "bar")
+                .attr("y", function(d){
+                    return y(d.CNT);
                 })
-                .attr("height", barHeight - 1);
-
+                .attr("height", y.rangeBand())
+                .attr("x", 0)
+                .attr("width", function(d) {
+                    return x(d.MATHAVE);
+                });
         }
 
 
