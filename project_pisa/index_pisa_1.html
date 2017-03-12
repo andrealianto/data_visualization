@@ -6,6 +6,12 @@
         <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
         <style>
+            #chart_title {
+                font: 24px sans-serif;
+                font-weight: bold;
+                text-align: center;
+            }
+
             #graphic {
                 text-align: center;
             }
@@ -28,6 +34,8 @@
     </head>
 
 <body>
+    <h2 id="chart_title">Math Scores</h2>
+
     <div id="graphic"></div>
 
     <script type="text/javascript">
@@ -48,7 +56,7 @@
             };
 
             var width = 600 - margin.left - margin.right,
-                height = 800 - margin.top - margin.bottom;
+                height = 1000 - margin.top - margin.bottom;
 
             var svg = d3.select("#graphic")
               .append("svg")
