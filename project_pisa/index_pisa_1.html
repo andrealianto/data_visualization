@@ -45,41 +45,27 @@
             }
 
             .chart-stepButton{
-                padding: 0 12px;
-                margin: 0;
-                display: block;
-                background: steelblue;
-                color: white;
-                text-decoration: none;
-                border-radius: 2px;
-                font-size: 14px;
-                line-height: 30px;
-                width: 30px;
+                height: 25px;
+                width: 60px;
+                padding: 0 7px;
+                background-color: white;
+                color: black;
+                cursor: pointer;
                 outline: none;
-                float: left;
+                border: 1px solid lightgrey;
+                box-shadow: 0 2px 2px transparent;
+            }
+
+            .chart-stepButton:hover{
+                background-color: #898989;
+                border: none;
+                color: white;
             }
 
             .chart-stepPrev{
                 margin-right: 4px;
             }
 
-            .chart-steps {
-                margin: 0 0 0 10px;
-                padding: 0;
-                display: block;
-                float: left;
-            }
-
-            .chart-step {
-                font-size: 13px;
-                background-image: none;
-                list-style-type: none;
-                cursor: pointer;
-                display: block;
-                float: left;
-                padding: 0px 7px;
-                margin: 7px 0;
-            }
 
             .bar {
                 fill: steelblue;
@@ -107,15 +93,8 @@
 
         <div class="button-row-wrapper">
             <div id="button-row">
-                <a href="#" class="chart-stepButton chart-stepPrev">Prev</a>
-                <a href="#" class="chart-stepButton chart-stepNext">Next</a>
-                <ul class="chart-steps">
-                    <li class="chart-step"><a href="#">1</a></li>
-                    <li class="chart-step"><a href="#">2</a></li>
-                    <li class="chart-step"><a href="#">3</a></li>
-                    <li class="chart-step"><a href="#">4</a></li>
-                    <li class="chart-step"><a href="#">5</a></li>
-                </ul>
+                <button class="chart-stepButton chart-stepPrev">Prev</buttom>
+                <button class="chart-stepButton chart-stepNext">Next</button>
 
             </div>
         </div>
