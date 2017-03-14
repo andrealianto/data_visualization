@@ -188,6 +188,14 @@
                 .enter()
                 .append("g");
 
+            function isOECD(d) {
+                if (d.OECD === "OECD"){
+                    return 1;
+                } else {
+                    return 0.6;
+                }
+            }
+
             // append rects
             bars.append("rect")
                 .attr("class", "bar")
@@ -198,7 +206,8 @@
                 .attr("x", 0)
                 .attr("width", function(d) {
                     return x(d.MATHAVE);
-                });
+                })
+                .style("fill-opacity", isOECD);
 
             svg.selectAll("line.verticalGrid")
                 .data(x.ticks(4))
