@@ -28,6 +28,12 @@
                 margin: 16px 0 0 0;
             }
 
+            #chart-desc {
+                font: 12px helvetica;
+                margin-top: 8px;
+                margin-bottom: 0;
+            }
+
             p {
                 font: 12px helvetica;
             }
@@ -48,16 +54,17 @@
                 height: 25px;
                 width: 60px;
                 padding: 0 7px;
-                background-color: #004276;
+                background-color: steelblue;
                 color: white;
                 outline: none;
-                border: 1px solid #004276;
+                border: 1px solid steelblue;
                 border-radius: 2px;
                 box-shadow: 0 2px 2px transparent;
             }
 
             .stepButton:hover{
-                background-color: #064D84;
+                background-color: steelblue;
+                opacity: 0.9;
                 border: none;
                 color: white;
             }
@@ -122,7 +129,13 @@
             d3.select("#graphic")
                 .append("h2")
                 .attr("id","chart-title")
-                .text("Performance in Mathematics");
+                .text("Mathematics");
+
+            // Add chart description
+            d3.select("#graphic")
+                .append("p")
+                .attr("id", "chart-desc")
+                .text("Clearly, an OECD status is not a good indication of student's competency in mathematics. In fact, non-OECD countries such as Shanghai, Singapore, Hong Kong, Taipei, Macao, Liechtenstein, and Vietnam outperformed many of their OECD peers.")
 
             // Sort bars based on value
             data = data.sort(function (a,b){
@@ -230,7 +243,10 @@
                 switch(page){
                     case 1:
                         d3.select("#chart-title")
-                            .text("Performance in Mathematics")
+                            .text("Mathematics")
+
+                        d3.select("#chart-desc")
+                            .text("Clearly, an OECD status is not a good indication of student's competency in mathematics. In fact, non-OECD countries such as Shanghai, Singapore, Hong Kong, Taipei, Macao, Liechtenstein, and Vietnam outperformed many of their OECD peers.")
 
                         // disable prev button on page 1
                         d3.select(".stepButton-prev")
@@ -256,7 +272,10 @@
 
                     case 2:
                         d3.select("#chart-title")
-                            .text("Performance in Reading")
+                            .text("Reading")
+
+                        d3.select("#chart-desc")
+                            .text("While OECD countries generally perform better than non-OECD countries in reading, we can still see some outliers. Shanghai, Hong Kong, Singapore, and Taipei consistently outperformed many of their OECD peers.")
 
                         // enable prev and next buttons on page 2
                         d3.select(".stepButton-prev")
@@ -282,7 +301,10 @@
 
                     case 3:
                         d3.select("#chart-title")
-                            .text("Performance in Science")
+                            .text("Science")
+
+                        d3.select("#chart-desc")
+                            .text("In science, students from Shanghai, Hong Kong, and Singapore, continued to do really well. A surprisingly strong performer here is Vietnam, beating the likes of Germany, the United States, and the United Kingdom.")
 
                         // disable next button on page 3
                         d3.select(".stepButton-next")
