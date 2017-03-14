@@ -44,26 +44,38 @@
                 padding: 8px 0 0;
             }
 
-            .chart-stepButton{
+            .stepButton{
                 height: 25px;
                 width: 60px;
                 padding: 0 7px;
-                background-color: white;
-                color: black;
-                cursor: pointer;
+                background-color: #004276;
+                color: white;
                 outline: none;
-                border: 1px solid lightgrey;
+                border: 1px solid #004276;
+                border-radius: 2px;
                 box-shadow: 0 2px 2px transparent;
             }
 
-            .chart-stepButton:hover{
-                background-color: #898989;
+            .stepButton:hover{
+                background-color: #064D84;
                 border: none;
                 color: white;
             }
 
-            #chart-stepPrev{
+            .stepButton-prev {
                 margin-right: 4px;
+            }
+
+            .stepButton-disabled {
+                background-color: lightgrey;
+                color: white;
+                border: 1px solid lightgrey;
+            }
+
+            .stepButton-disabled:hover {
+                background-color: lightgrey;
+                color: white;
+                border: 1px solid lightgrey;
             }
 
 
@@ -93,8 +105,8 @@
 
         <div class="button-row-wrapper">
             <div id="button-row">
-                <button class="chart-stepButton" id="chart-stepPrev">Prev</buttom>
-                <button class="chart-stepButton" id="chart-stepNext">Next</button>
+                <button class="stepButton stepButton-prev stepButton-disabled">Prev</buttom>
+                <button class="stepButton stepButton-next">Next</button>
 
             </div>
         </div>
@@ -211,6 +223,10 @@
                         d3.select("#chart-title")
                             .text("Performance in Mathematics")
 
+                        // disable prev button on page 1
+                        d3.select(".stepButton-prev")
+                            .attr("class", "stepButton stepButton-prev stepButton-disabled")
+
                         // update bar charts to show maths score
                         svg.selectAll("rect")
                             .attr("y", function(d){
@@ -233,6 +249,13 @@
                         d3.select("#chart-title")
                             .text("Performance in Reading")
 
+                        // enable prev and next buttons on page 2
+                        d3.select(".stepButton-prev")
+                            .attr("class", "stepButton stepButton-prev")
+
+                        d3.select(".stepButton-next")
+                            .attr("class", "stepButton stepButton-next")
+
                         // update bar charts to show reading scores
                         svg.selectAll("rect")
                             .attr("height", y.rangeBand())
@@ -251,6 +274,10 @@
                     case 3:
                         d3.select("#chart-title")
                             .text("Performance in Science")
+
+                        // disable next button on page 3
+                        d3.select(".stepButton-next")
+                            .attr("class", "stepButton stepButton-next stepButton-disabled")
 
                         // update bar charts to show science scores
                         svg.selectAll("rect")
@@ -294,14 +321,18 @@
 
             }
 
-            d3.select("#chart-stepNext").on("click", function(){
-                page++;
-                update()
+            d3.select(".stepButton-next").on("click", function(){
+                if(page<3){
+                    page++;
+                    update();
+                }
             })
 
-            d3.select("#chart-stepPrev").on("click", function(){
-                page--;
-                update()
+            d3.select(".stepButton-prev").on("click", function(){
+                if(page>1){
+                    page--;
+                    update();
+                }
             })
         }
 
