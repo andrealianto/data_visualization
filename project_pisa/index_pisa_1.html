@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <title>Bar Chart</title>
         <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 
         <style>
             #frame {
@@ -90,6 +91,10 @@
                 fill: steelblue;
             }
 
+            .bar:hover {
+                fill: rgb(242,124,33);
+            }
+
             .axis path,
             .axis line {
                 fill: none;
@@ -98,6 +103,35 @@
 
             .axis text {
                 font: 10px sans-serif;
+            }
+
+            .d3-tip {
+              line-height: 1;
+              font: 12px helvetica;
+              padding: 12px;
+              background: lightgrey;
+              color: black;
+              border-radius: 2px;
+            }
+
+            /* Creates a small triangle extender for the tooltip */
+            .d3-tip:after {
+              box-sizing: border-box;
+              display: inline;
+              font-size: 10px;
+              width: 100%;
+              line-height: 1;
+              color: lightgrey;
+              content: "\25BC";
+              position: absolute;
+              text-align: center;
+            }
+
+            /* Style northward tooltips differently */
+            .d3-tip.n:after {
+              margin: -1px 0 0 0;
+              top: 100%;
+              left: 0;
             }
 
         </style>
@@ -209,6 +243,16 @@
                 }
             }
 
+            // Create tool tip
+            var tip = d3.tip()
+                .attr('class', 'd3-tip')
+                .offset([-10, 0])
+                .html(function(d) {
+                    return "<strong>" + d.CNT + " - Math Score:</strong> <span>" + d.MATHAVE + "</span>";
+                })
+
+            svg.call(tip);
+
             // append rects
             bars.append("rect")
                 .attr("class", "bar")
@@ -220,7 +264,9 @@
                 .attr("width", function(d) {
                     return x(d.MATHAVE);
                 })
-                .style("fill-opacity", isOECD);
+                .style("fill-opacity", isOECD)
+                .on("mouseover", tip.show)
+                .on("mouseout", tip.hide)
 
             svg.selectAll("line.verticalGrid")
                 .data(x.ticks(4))
@@ -238,6 +284,21 @@
                     "opacity" : 0.7,
                     "stroke-width" : "1px"
                 });
+
+
+            d3.select(".stepButton-next").on("click", function(){
+                if(page<3){
+                    page++;
+                    update();
+                }
+            })
+
+            d3.select(".stepButton-prev").on("click", function(){
+                if(page>1){
+                    page--;
+                    update();
+                }
+            })
 
             function update() {
                 switch(page){
@@ -281,9 +342,6 @@
                         d3.select(".stepButton-prev")
                             .attr("class", "stepButton stepButton-prev")
 
-                        d3.select(".stepButton-next")
-                            .attr("class", "stepButton stepButton-next")
-
                         // update bar charts to show reading scores
                         svg.selectAll("rect")
                             .attr("height", y.rangeBand())
@@ -308,7 +366,7 @@
 
                         // disable next button on page 3
                         d3.select(".stepButton-next")
-                            .attr("class", "stepButton stepButton-next stepButton-disabled")
+                            .attr("class", "stepButton stepButton-next")
 
                         // update bar charts to show science scores
                         svg.selectAll("rect")
@@ -327,14 +385,16 @@
                               .copy();
 
                         break;
+
                 }
 
                 /* Animate bar chart sorting. Steps:
                    1. Sort bar chart
                    2. Sort country using the new country mapping */
 
+
                 var transition = svg.transition()
-                                    .duration(750);
+                                .duration(750);
 
                 var delay = function(d, i) {return i * 50;};
 
@@ -352,19 +412,7 @@
 
             }
 
-            d3.select(".stepButton-next").on("click", function(){
-                if(page<3){
-                    page++;
-                    update();
-                }
-            })
 
-            d3.select(".stepButton-prev").on("click", function(){
-                if(page>1){
-                    page--;
-                    update();
-                }
-            })
         }
 
 
