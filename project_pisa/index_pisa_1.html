@@ -2,145 +2,16 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Bar Chart</title>
+        <title>PISA 2012 Result</title>
         <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
         <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
-
-        <style>
-            #frame {
-                width: 972px;
-                margin: 0 auto;
-                text-align: left;
-            }
-
-            #graphic {
-                width: 970px;
-                border-top: 1px solid lightgrey;
-                margin: 12px auto;
-
-            }
-
-            #title {
-                font: 30px helvetica;
-            }
-
-            #chart-title{
-                font: 24px helvetica;
-                margin: 16px 0 0 0;
-            }
-
-            #chart-desc {
-                font: 12px helvetica;
-                margin-top: 8px;
-                margin-bottom: 0;
-            }
-
-            p {
-                font: 12px helvetica;
-            }
-
-            .button-row-wrapper{
-                position: relative;
-                font-family: helvetica;
-            }
-
-            #button-row {
-                position: relative;
-                height: 28px;
-                margin: 8px 0 0;
-                padding: 8px 0 0;
-            }
-
-            .stepButton{
-                height: 25px;
-                width: 60px;
-                padding: 0 7px;
-                background-color: steelblue;
-                color: white;
-                outline: none;
-                border: 1px solid steelblue;
-                border-radius: 2px;
-                box-shadow: 0 2px 2px transparent;
-            }
-
-            .stepButton:hover{
-                background-color: steelblue;
-                opacity: 0.9;
-                border: none;
-                color: white;
-            }
-
-            .stepButton-prev {
-                margin-right: 4px;
-            }
-
-            .stepButton-disabled {
-                background-color: lightgrey;
-                color: white;
-                border: 1px solid lightgrey;
-            }
-
-            .stepButton-disabled:hover {
-                background-color: lightgrey;
-                color: white;
-                border: 1px solid lightgrey;
-            }
-
-
-            .bar {
-                fill: steelblue;
-            }
-
-            .bar:hover {
-                fill: rgb(242,124,33);
-            }
-
-            .axis path,
-            .axis line {
-                fill: none;
-                stroke: none;
-            }
-
-            .axis text {
-                font: 10px sans-serif;
-            }
-
-            .d3-tip {
-              line-height: 1;
-              font: 12px helvetica;
-              padding: 12px;
-              background: lightgrey;
-              color: black;
-              border-radius: 2px;
-            }
-
-            /* Creates a small triangle extender for the tooltip */
-            .d3-tip:after {
-              box-sizing: border-box;
-              display: inline;
-              font-size: 10px;
-              width: 100%;
-              line-height: 1;
-              color: lightgrey;
-              content: "\25BC";
-              position: absolute;
-              text-align: center;
-            }
-
-            /* Style northward tooltips differently */
-            .d3-tip.n:after {
-              margin: -1px 0 0 0;
-              top: 100%;
-              left: 0;
-            }
-
-        </style>
+        <link href="app.css" rel="stylesheet" type="text/css">
     </head>
 
 <body>
 
     <div id="frame">
-        <h2 id="title">PISA 2012: The Results</h2>
+        <h2 id="title">PISA 2012: The Result</h2>
         <p>The Programme for International Student Assessment (PISA) is a triennial international survey which aims to evaluate education systems worldwide by assessing the competencies of 15-year-old students in mathematics, science, and reading.</p>
         <p>In 2012, around 510 000 students aged 15-16 years old from 65 countries participated, representing about 28 million 15-year-olds globally.</p>
 
@@ -248,7 +119,7 @@
                 .attr('class', 'd3-tip')
                 .offset([-10, 0])
                 .html(function(d) {
-                    return "<strong>" + d.CNT + " - Math Score:</strong> <span>" + d.MATHAVE + "</span>";
+                    return "<strong>" + d.CNT + " (" + d.OECD + ") | Math Score:</strong> <span>" + d.MATHAVE + "</span>";
                 })
 
             svg.call(tip);
@@ -313,6 +184,13 @@
                         d3.select(".stepButton-prev")
                             .attr("class", "stepButton stepButton-prev stepButton-disabled")
 
+                        // Update tool tip
+                        tip.html(function(d) {
+                            return "<strong>" + d.CNT + " (" + d.OECD + ") | Math Score:</strong> <span>" + d.MATHAVE + "</span>";
+                        })
+
+                        svg.call(tip);
+
                         // update bar charts to show maths score
                         svg.selectAll("rect")
                             .attr("y", function(d){
@@ -342,6 +220,13 @@
                         d3.select(".stepButton-prev")
                             .attr("class", "stepButton stepButton-prev")
 
+                        // Update tool tip
+                        tip.html(function(d) {
+                            return "<strong>" + d.CNT + " (" + d.OECD + ") | Reading Score:</strong> <span>" + d.READAVE + "</span>";
+                        })
+
+                        svg.call(tip);
+
                         // update bar charts to show reading scores
                         svg.selectAll("rect")
                             .attr("height", y.rangeBand())
@@ -366,7 +251,14 @@
 
                         // disable next button on page 3
                         d3.select(".stepButton-next")
-                            .attr("class", "stepButton stepButton-next")
+                            .attr("class", "stepButton stepButton-next stepButton-disabled")
+
+                        // Update tool tip
+                        tip.html(function(d) {
+                            return "<strong>" + d.CNT + " (" + d.OECD + ") | Science Score:</strong> <span>" + d.SCIEAVE + "</span>";
+                        })
+
+                        svg.call(tip);
 
                         // update bar charts to show science scores
                         svg.selectAll("rect")
@@ -409,12 +301,9 @@
                   .selectAll("g")
                     .delay(delay);
 
-
             }
 
-
         }
-
 
         // Load dataset
         d3.csv("pisa2012_final.csv", function(d) {
@@ -429,7 +318,6 @@
             console.log(data);
             draw(data);
         });
-
 
     </script>
 </body>
