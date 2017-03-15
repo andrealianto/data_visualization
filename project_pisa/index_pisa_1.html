@@ -219,6 +219,8 @@
                         // enable prev and next buttons on page 2
                         d3.select(".stepButton-prev")
                             .attr("class", "stepButton stepButton-prev")
+                        d3.select(".stepButton-next")
+                            .attr("class", "stepButton stepButton-next")
 
                         // Update tool tip
                         tip.html(function(d) {
@@ -283,7 +285,6 @@
                 /* Animate bar chart sorting. Steps:
                    1. Sort bar chart
                    2. Sort country using the new country mapping */
-
 
                 var transition = svg.transition()
                                 .duration(750);
