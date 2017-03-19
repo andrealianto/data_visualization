@@ -103,6 +103,50 @@ button:last-of-type {
     background-color: black;
 }
 
+#overview-block-mask {
+    position: absolute;
+    background-color: white;
+    width: 210px;
+    height: 240px;
+    z-index: 1;
+
+}
+
+.overview-block-active {
+    color: black !important;
+    z-index: 2 !important;
+}
+
+#overview-block-advertising {
+    position: absolute;
+    color: white;
+    z-index: -1;
+}
+
+#overview-block-posdisplay {
+    position: absolute;
+    color: white;
+    z-index: -1;
+}
+
+#overview-block-packaging {
+    position: absolute;
+    color: white;
+    z-index: -1;
+}
+
+#overview-block-smokingbans {
+    position: absolute;
+    color: white;
+    z-index: -1;
+}
+
+#overview-block-ecig {
+    position: absolute;
+    color: white;
+    z-index: -1;
+}
+
 .overview-info {
     float: left;
     width: 165px;
@@ -114,10 +158,10 @@ button:last-of-type {
 
 .overview-topic {
     font-weight: bold;
-    color: #333333;
     display: inline;
 }
 
 .overview-topic-desc {
     display: inline;
 }
+
