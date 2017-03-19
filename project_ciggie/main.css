@@ -27,6 +27,10 @@
     margin-bottom: 4px;
 }
 
+.button-active {
+    background-color: #EEEEEE;
+}
+
 button {
     font-family: arial;
     font-size: 12px;
@@ -51,6 +55,11 @@ button:last-of-type {
     border-right-width: 1px;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
+}
+
+button:hover {
+    border-color: #AAAAAA;
+    box-shadow: 0 2px 2px #DDDDDD;
 }
 
 .interactive-content {

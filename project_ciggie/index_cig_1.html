@@ -30,8 +30,8 @@
                     </div>
 
                     <div class="button-row-bottom">
-                        <button class="button-row-bottom button-clicked" id="button-overall">Overall</button>
-                        <button class="button-active" id="button-1">Media</button>
+                        <button class="button-row-bottom button-active" id="button-overall">Overall</button>
+                        <button class id="button-1">Media</button>
                         <button class id="button-2">Outdoor</button>
                         <button class id="button-3">Sponsorship</button>
                         <button class id="button-4">Point-of-sale</button>
@@ -271,10 +271,36 @@
                 }
             }
 
+            function load(data) {
+                "use strict";
+
+
+
+            }
+
+
+
 
             // Use D3 to load GeoJSON data for Asia
             d3.json("asean.json", draw);
 
+            // Use D3 to load csv file for cigarette regulations
+            // d3.csv("cig_regulation_asia.csv", function(d) {
+            //     return {
+            //         country : d.country,
+            //         ads_media : d.marketing_media,
+            //         ads_outdoor: d.marketing_outdoor,
+            //         ads_sponsorship: d.marketing_event,
+            //         ads_sample: d.marketing_sample,
+            //         ads_pos: d.marketing_posAds,
+            //         ads_score: +d.marketing_score
+            //     };
+            // }).get(function(error, data) {
+            //     console.log(data);
+            //     load(data);
+            // });
+
+            d3.csv("cig_regulation_asia.csv", load);
 
         </script>
 
