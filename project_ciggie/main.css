@@ -1,0 +1,52 @@
+.frame {
+    width: 960px;
+    height: 502px;
+    margin: 0 auto;
+}
+
+#article-headline {
+    font: 24px helvetica;
+}
+
+#article-description {
+    font: 12px helvetica;
+}
+
+.main-content {
+    border-top: 1px solid lightgrey;
+    margin: 12px auto;
+}
+
+#button-row-wrapper {
+    margin-top: 12px;
+    font-size: 0px;
+}
+
+.button-row-bottom {
+    margin-top: 4px;
+}
+
+button {
+    font-size: 12px;
+    height: 25px;
+    padding: 0 10px;
+    background-color: #FFFFFF;
+    color: black;
+    cursor: pointer;
+    outline: none;
+    border: 1px solid #CCCCCC;
+    border-right-width: 0px;
+    box-shadow: 0 2px 2px transparent;
+
+}
+
+button:first-of-type {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+button:last-of-type {
+    border-right-width: 1px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
