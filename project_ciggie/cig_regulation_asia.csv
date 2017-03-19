@@ -1,0 +1,17 @@
+country,fctc,legal-smoking-age,marketing-outdoor,marketing-media,marketing-sample,marketing-event,marketing-posAds,marketing-score,posDisplay-banned,posDisplay-restrictedArea,posDisplay-onePackPerBrand,posDisplay-score,packaging-pictWarning,packaging-plain,packaging-packSize20,packaging-score,smokingban-barRestaurant,smokingban-office,smokingban-publicTransport,smokingban-school,smokingban-hospital,smokingban-indoorPublicPlace,smokingban-score,ecig-import-ban,ecig-sales-ban,ecig-possession-ban,ecig-score
+Bangladesh,yes,16,no,no,no,restricted,no,0.9,yes,,,0.333333333,0.5,no,,0.166666667,restricted,yes,restricted,yes,yes,restricted,0.75,,,,0
+Cambodia,yes,18,no,no,,no,,0.6,no,yes,yes,0.666666667,0.5,no,,0.166666667,restricted,yes,yes,yes,yes,restricted,0.833333333,yes,yes,,0.666666667
+China,yes,,no,no,,yes,no,0.6,,,,0,0.35,no,,0.116666667,,no,restricted,restricted,yes,restricted,0.416666667,,no,no,0
+Hong Kong,yes,18,no,no,no,yes,no,0.8,no,,,0,0.5,no,,0.166666667,yes,yes,restricted,yes,yes,restricted,0.833333333,,,,0
+Indonesia,no,18,restricted,restricted,no,restricted,yes,0.5,no,,,0,0.4,no,,0.133333333,restricted,yes,yes,yes,yes,restricted,0.833333333,,,,0
+Japan,yes,,yes,yes,yes,yes,yes,0,no,,,0,0.3,no,,0.1,no,no,no,no,no,no,0,restricted,restricted,restricted,0.5
+Laos,yes,18,no,no,no,no,yes,0.8,no,,,0,0.75,no,,0.25,yes,yes,yes,yes,yes,yes,1,,,,0
+Malaysia,yes,18,no,no,no,no,no,1,no,,,0,0.55,no,,0.183333333,restricted,restricted,restricted,yes,yes,restricted,0.666666667,restricted,restricted,restricted,0.5
+Myanmar,yes,18,no,no,no,restricted,restricted,0.8,,,,0,0.75,no,,0.25,restricted,restricted,yes,yes,yes,restricted,0.75,,,,0
+Philippines,yes,18,no,no,restricted,restricted,yes,0.6,no,,,0,0.5,no,,0.166666667,restricted,restricted,yes,yes,yes,restricted,0.75,,,,0
+Singapore,yes,21,no,no,no,restricted,no,0.9,yes,yes,yes,1,0.5,no,yes,0.5,restricted,restricted,yes,yes,yes,restricted,0.75,yes,yes,yes,1
+South Korea,yes,19,no,,,,yes,0.2,no,,,0,0.5,no,,0.166666667,yes,yes,yes,yes,yes,yes,1,no,no,no,0
+Sri Lanka,yes,21,no,no,no,restricted,no,0.9,no,,,0,0.8,no,,0.266666667,restricted,yes,yes,yes,yes,restricted,0.833333333,,,,0
+Taiwan,no,18,no,no,no,restricted,no,0.9,no,yes,,0.333333333,0.35,no,,0.116666667,restricted,restricted,yes,yes,yes,restricted,0.75,,,,0
+Thailand,yes,18,no,no,no,restricted,no,0.9,no,,,0,0.85,no,yes,0.616666667,restricted,yes,yes,yes,yes,restricted,0.833333333,yes,,,0.333333333
+Vietnam,yes,18,no,no,no,restricted,no,0.9,no,,yes,0.333333333,0.5,no,,0.166666667,restricted,yes,restricted,yes,yes,restricted,0.75,,,,0
