@@ -172,3 +172,7 @@ button:last-of-type {
     text-align: left;
     margin-left: 2px;
 }
+
+.selected {
+    fill: red !important;
+}

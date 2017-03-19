@@ -249,7 +249,7 @@
                 var projection = d3.geo.mercator()
                                        .center([87,29])
                                        .scale(550)
-                                       .translate([0,0]);
+                                       .translate([0,0])
 
                 var path = d3.geo.path().projection(projection);
 
@@ -257,13 +257,19 @@
                              .data(geo_data.features)
                              .enter()
                              .append('path')
+                             .attr("id", function(d) {return d.properties.brk_name;})
                              .attr('d', path)
-                             .style('fill', 'rgb(9,157,217)')
+                             .on('click', select_country)
+                             .style('fill', 'white')
                              .style('stroke', 'black')
                              .style('stroke-width', 0.5);
+
+                function select_country(){
+                    d3.select('.selected').classed('selected', false);
+                    d3.select(this).classed('selected', true);
+                    d3.select('#overview-country-name').text(this.id);
+                }
             }
-
-
 
 
             // Use D3 to load GeoJSON data for Asia
