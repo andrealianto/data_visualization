@@ -24,6 +24,7 @@
 
 .button-row-bottom {
     margin-top: 4px;
+    margin-bottom: 4px;
 }
 
 button {
@@ -49,4 +50,22 @@ button:last-of-type {
     border-right-width: 1px;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
+}
+
+.interactive-content {
+    display: inline-flex;
+}
+
+#asia-map {
+    width: 720px;
+    height: 400px;
+    margin-right: 4px;
+    border: 1px solid #CCCCCC;
+    background-color: black;
+}
+
+#overview-wrapper {
+    width: 230px;
+    height: 400px;
+    border: 1px solid #CCCCCC;
 }
