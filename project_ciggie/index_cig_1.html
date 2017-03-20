@@ -79,7 +79,7 @@
                     <div id="asia-map"></div>
 
                     <div id="overview-wrapper">
-                        <div id="overview-country-name">Indonesia (Non-FCTC)</div>
+                        <div id="overview-country-name">Indonesia</div>
                         <div id="overview-toughness-score">
                             <p>TOUGHNESS SCORE</p>
                             <p id="toughness-score">35%</p>
@@ -299,10 +299,17 @@
                              .style('stroke', 'black')
                              .style('stroke-width', 0.5);
 
+                // Pre-select Indonesia at the start
+                d3.select('#Indonesia').classed('selected', true);
+
                 function select_country(){
                     d3.select('.selected').classed('selected', false);
                     d3.select(this).classed('selected', true);
                     d3.select('#overview-country-name').text(this.id);
+
+                    var selected_category = d3.select('.button-top-active').text();
+                    update_toughness_score(this.id, selected_category);
+
                 }
             }
 
@@ -319,6 +326,7 @@
 
                 })
 
+                // Update button-row-bottom and overview-block when top buttons are clicked
                 function update_display(button_id){
                     d3.select('.button-row-bottom-active').classed('button-row-bottom-active', false);
                     d3.select('.overview-block-active').classed('overview-block-active', false);
