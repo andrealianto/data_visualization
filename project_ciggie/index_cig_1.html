@@ -22,16 +22,16 @@
             <div class="main-content">
                 <div id="button-row-wrapper">
                     <div class="button-row-top">
-                        <button class="button-active" id="button-advertising">Advertising</button>
-                        <button class id="button-posdisplay">Point-of-sale Display</button>
-                        <button class id="button-packaging">Packaging</button>
-                        <button class id="button-smokingbans">Smoking Bans</button>
-                        <button class id="button-ecig">E-cigarettes</button>
+                        <button class="button-top button-top-active" id="button-advertising">Advertising</button>
+                        <button class="button-top" id="button-posdisplay">Point-of-sale Display</button>
+                        <button class="button-top" id="button-packaging">Packaging</button>
+                        <button class="button-top" id="button-smokingbans">Smoking Bans</button>
+                        <button class="button-top" id="button-ecig">E-cigarettes</button>
                     </div>
 
                     <div id="button-row-bottom-wrapper">
                         <div class="button-row-bottom-active" id="button-row-bottom-advertising">
-                            <button class="button-active" id="button-overall-ads">Overall</button>
+                            <button class="button-bottom-active" id="button-overall-ads">Overall</button>
                             <button class id="button-media">Media</button>
                             <button class id="button-outdoor">Outdoor</button>
                             <button class id="button-sponsorship">Sponsorship</button>
@@ -40,21 +40,21 @@
                         </div>
 
                         <div id="button-row-bottom-posdisplay">
-                            <button class="button-active" id="button-overall-posdisplay">Overall</button>
+                            <button class id="button-overall-posdisplay">Overall</button>
                             <button class id="button-posban">POS Display Ban</button>
                             <button class id="button-restrictedarea">Restricted POS Area</button>
                             <button class id="button-onepack">One Pack Per Brand</button>
                         </div>
 
                         <div id="button-row-bottom-packaging">
-                            <button class="button-active" id="button-overall-packaging">Overall</button>
+                            <button class id="button-overall-packaging">Overall</button>
                             <button class id="button-plain">Plain Packaging</button>
                             <button class id="button-pictwarning">Pictorial Warning</button>
                             <button class id="button-packsize">Pack Size Restriction</button>
                         </div>
 
                         <div id="button-row-bottom-smokingbans">
-                            <button class="button-active" id="button-overall-smokingbans">Overall</button>
+                            <button class id="button-overall-smokingbans">Overall</button>
                             <button class id="button-bars">Bars/Restaurants</button>
                             <button class id="button-office">Offices</button>
                             <button class id="button-publictransport">Public Transport</button>
@@ -64,7 +64,7 @@
                         </div>
 
                         <div id="button-row-bottom-ecig">
-                            <button class="button-active" id="button-overall-ecig">Overall</button>
+                            <button class id="button-overall-ecig">Overall</button>
                             <button class id="button-import">Import</button>
                             <button class id="button-sales">Sales</button>
                             <button class id="button-possession">Possession</button>
@@ -263,7 +263,6 @@
 
             </div>
 
-
             <div class="footer">&copy; 2017 Andrea Lianto. All rights reserved.</div>
         </div>
 
@@ -309,6 +308,87 @@
 
             function load(data) {
                 "use strict";
+
+                var button_top = d3.selectAll(".button-top")
+
+                button_top.on("click", function() {
+                    d3.select('.button-top-active').classed('button-top-active', false);
+                    d3.select(this).classed('button-top-active', true);
+
+                    update_display(this.id);
+
+                })
+
+                function update_display(button_id){
+                    d3.select('.button-row-bottom-active').classed('button-row-bottom-active', false);
+                    d3.select('.overview-block-active').classed('overview-block-active', false);
+
+                    switch(button_id) {
+
+                        case "button-advertising":
+                            d3.select('#button-row-bottom-advertising')
+                                .classed('button-row-bottom-active', true);
+
+                            d3.select('#overview-block-advertising')
+                                .classed('overview-block-active', true);
+
+                            d3.select('#toughness-score-desc')
+                                .text('For cigarette advertising');
+
+                            break;
+
+                        case "button-posdisplay":
+                            d3.select('#button-row-bottom-posdisplay')
+                                .classed('button-row-bottom-active', true);
+
+                            d3.select('#overview-block-posdisplay')
+                                .classed('overview-block-active', true);
+
+                            d3.select('#toughness-score-desc')
+                                .text('For point-of-sale cigarette display');
+
+                            break;
+
+                        case "button-packaging":
+                            d3.select('#button-row-bottom-packaging')
+                                .classed('button-row-bottom-active', true);
+
+                            d3.select('#overview-block-packaging')
+                                .classed('overview-block-active', true);
+
+                            d3.select('#toughness-score-desc')
+                                .text('For cigarette packaging');
+
+                            break;
+
+                        case "button-smokingbans":
+                            d3.select('#button-row-bottom-smokingbans')
+                                .classed('button-row-bottom-active', true);
+
+                            d3.select('#overview-block-smokingbans')
+                                .classed('overview-block-active', true);
+
+                            d3.select('#toughness-score-desc')
+                                .text('For smoking bans');
+
+                            break;
+
+                        case "button-ecig":
+                            d3.select('#button-row-bottom-ecig')
+                                .classed('button-row-bottom-active', true);
+
+                            d3.select('#overview-block-ecig')
+                                .classed('overview-block-active', true);
+
+                            d3.select('#toughness-score-desc')
+                                .text('For e-cigarettes');
+
+                            break;
+                    }
+                }
+
+
+
 
 
 
