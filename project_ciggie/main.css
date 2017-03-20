@@ -22,8 +22,7 @@
     font-size: 0px;
 }
 
-.button-row-bottom {
-    margin-top: 4px;
+.button-row-top {
     margin-bottom: 4px;
 }
 
@@ -62,8 +61,36 @@ button:hover {
     box-shadow: 0 2px 2px #DDDDDD;
 }
 
+#button-row-bottom-wrapper {
+    background-color: black;
+}
+
+#button-row-bottom-mask {
+    position: absolute;
+    background-color: white;
+    width: 960px;
+    height: 25px;
+    z-index: 1;
+}
+
+.button-row-bottom-active {
+    z-index: 2 !important;
+}
+
+#button-row-bottom-advertising,
+#button-row-bottom-posdisplay,
+#button-row-bottom-packaging,
+#button-row-bottom-smokingbans,
+#button-row-bottom-ecig {
+    position: absolute;
+    z-index: -1;
+}
+
+
+
 .interactive-content {
     display: inline-flex;
+    margin-top: 28px;
 }
 
 #asia-map {
@@ -71,7 +98,7 @@ button:hover {
     height: 400px;
     margin-right: 4px;
     border: 1px solid #CCCCCC;
-    background-color: black;
+    background-color: #595959;
 }
 
 #overview-wrapper {
@@ -118,7 +145,6 @@ button:hover {
     width: 210px;
     height: 240px;
     z-index: 1;
-
 }
 
 .overview-block-active {
@@ -126,30 +152,10 @@ button:hover {
     z-index: 2 !important;
 }
 
-#overview-block-advertising {
-    position: absolute;
-    color: white;
-    z-index: -1;
-}
-
-#overview-block-posdisplay {
-    position: absolute;
-    color: white;
-    z-index: -1;
-}
-
-#overview-block-packaging {
-    position: absolute;
-    color: white;
-    z-index: -1;
-}
-
-#overview-block-smokingbans {
-    position: absolute;
-    color: white;
-    z-index: -1;
-}
-
+#overview-block-advertising,
+#overview-block-posdisplay,
+#overview-block-packaging,
+#overview-block-smokingbans,
 #overview-block-ecig {
     position: absolute;
     color: white;

@@ -29,14 +29,50 @@
                         <button class id="button-ecig">E-cigarettes</button>
                     </div>
 
-                    <div class="button-row-bottom">
-                        <button class="button-row-bottom button-active" id="button-overall">Overall</button>
-                        <button class id="button-1">Media</button>
-                        <button class id="button-2">Outdoor</button>
-                        <button class id="button-3">Sponsorship</button>
-                        <button class id="button-4">Point-of-sale</button>
-                        <button class id="button-5">Free Sample</button>
+                    <div id="button-row-bottom-wrapper">
+                        <div class="button-row-bottom-active" id="button-row-bottom-advertising">
+                            <button class="button-active" id="button-overall-ads">Overall</button>
+                            <button class id="button-media">Media</button>
+                            <button class id="button-outdoor">Outdoor</button>
+                            <button class id="button-sponsorship">Sponsorship</button>
+                            <button class id="button-pos">Point-of-sale</button>
+                            <button class id="button-freesample">Free Sample</button>
+                        </div>
+
+                        <div id="button-row-bottom-posdisplay">
+                            <button class="button-active" id="button-overall-posdisplay">Overall</button>
+                            <button class id="button-posban">POS Display Ban</button>
+                            <button class id="button-restrictedarea">Restricted POS Area</button>
+                            <button class id="button-onepack">One Pack Per Brand</button>
+                        </div>
+
+                        <div id="button-row-bottom-packaging">
+                            <button class="button-active" id="button-overall-packaging">Overall</button>
+                            <button class id="button-plain">Plain Packaging</button>
+                            <button class id="button-pictwarning">Pictorial Warning</button>
+                            <button class id="button-packsize">Pack Size Restriction</button>
+                        </div>
+
+                        <div id="button-row-bottom-smokingbans">
+                            <button class="button-active" id="button-overall-smokingbans">Overall</button>
+                            <button class id="button-bars">Bars/Restaurants</button>
+                            <button class id="button-office">Offices</button>
+                            <button class id="button-publictransport">Public Transport</button>
+                            <button class id="button-school">Schools</button>
+                            <button class id="button-hospital">Hospitals</button>
+                            <button class id="button-indoor">Indoor Public Area</button>
+                        </div>
+
+                        <div id="button-row-bottom-ecig">
+                            <button class="button-active" id="button-overall-ecig">Overall</button>
+                            <button class id="button-import">Import</button>
+                            <button class id="button-sales">Sales</button>
+                            <button class id="button-possession">Possession</button>
+                        </div>
+
+                        <div id="button-row-bottom-mask"></div>
                     </div>
+
                 </div>
 
                 <div class="interactive-content">
@@ -112,7 +148,7 @@
                             <div class="overview-topic-row">
                                 <div class="overview-topic-bullet" id="overview-onepack-bullet"></div>
                                 <div class="overview-info">
-                                    <div class="overview-topic">Only one pack per brand: </div>
+                                    <div class="overview-topic">One Pack Per Brand: </div>
                                     <div class="overview-topic-desc" id="overview-onepack-desc"> No</div>
                                 </div>
                             </div>
@@ -156,7 +192,7 @@
                             <div class="overview-topic-row">
                                 <div class="overview-topic-bullet" id="overview-office-bullet"></div>
                                 <div class="overview-info">
-                                    <div class="overview-topic">Office: </div>
+                                    <div class="overview-topic">Offices: </div>
                                     <div class="overview-topic-desc" id="overview-office-desc"> No</div>
                                 </div>
                             </div>
@@ -172,7 +208,7 @@
                             <div class="overview-topic-row">
                                 <div class="overview-topic-bullet" id="overview-school-bullet"></div>
                                 <div class="overview-info">
-                                    <div class="overview-topic">School: </div>
+                                    <div class="overview-topic">Schools: </div>
                                     <div class="overview-topic-desc" id="overview-school-desc"> No</div>
                                 </div>
                             </div>
@@ -180,7 +216,7 @@
                             <div class="overview-topic-row">
                                 <div class="overview-topic-bullet" id="overview-hospital-bullet"></div>
                                 <div class="overview-info">
-                                    <div class="overview-topic">Hospital: </div>
+                                    <div class="overview-topic">Hospitals: </div>
                                     <div class="overview-topic-desc" id="overview-hospital-desc"> No</div>
                                 </div>
                             </div>
@@ -284,22 +320,7 @@
             // Use D3 to load GeoJSON data for Asia
             d3.json("asean.json", draw);
 
-            // Use D3 to load csv file for cigarette regulations
-            // d3.csv("cig_regulation_asia.csv", function(d) {
-            //     return {
-            //         country : d.country,
-            //         ads_media : d.marketing_media,
-            //         ads_outdoor: d.marketing_outdoor,
-            //         ads_sponsorship: d.marketing_event,
-            //         ads_sample: d.marketing_sample,
-            //         ads_pos: d.marketing_posAds,
-            //         ads_score: +d.marketing_score
-            //     };
-            // }).get(function(error, data) {
-            //     console.log(data);
-            //     load(data);
-            // });
-
+            // Use D3 to load csv data
             d3.csv("cig_regulation_asia.csv", load);
 
         </script>
