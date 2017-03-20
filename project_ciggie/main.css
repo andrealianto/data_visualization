@@ -190,5 +190,7 @@ button:hover {
 }
 
 .selected {
+    stroke-width: 1.5 !important;
     fill: red !important;
+    fill-opacity: 0.5;
 }
