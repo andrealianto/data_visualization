@@ -270,6 +270,8 @@
 
             // draw map
             function draw(geo_data){
+
+                /* LOAD MAP ================================================ */
                 var margin = 15,
                     width = 720 - margin,
                     height = 400 - margin;
@@ -302,29 +304,44 @@
                 // Pre-select Indonesia at the start
                 d3.select('#Indonesia').classed('selected', true);
 
+                /* FUNCTIONS =============================================== */
+                // Select country on the map
                 function select_country(){
                     d3.select('.selected').classed('selected', false);
                     d3.select(this).classed('selected', true);
                     d3.select('#overview-country-name').text(this.id);
 
                     var selected_category = d3.select('.button-top-active').text();
+
                     update_toughness_score(this.id, selected_category);
+                }
+
+                function update_toughness_score(country_name, selected_category) {
+                    data.forEach(function(d){
+                        if(d.country == country_name){
+                            switch(selected_category){
+                                case "Advertising":
+                                    d3.select('#toughness-score').text(d.marketing_score);
+                                    break;
+                                case "Point-of-sale Display":
+                                    d3.select('#toughness-score').text(d.posDisplay_score);
+                                    break;
+                                case "Packaging":
+                                    d3.select('#toughness-score').text(d.packaging_score);
+                                    break;
+                                case "Smoking Bans":
+                                    d3.select('#toughness-score').text(d.smokingban_score);
+                                    break;
+                                case "E-cigarettes":
+                                    d3.select('#toughness-score').text(d.ecig_score);
+                                    break;
+                            }
+
+
+                        }
+                    });
 
                 }
-            }
-
-            function load(data) {
-                "use strict";
-
-                var button_top = d3.selectAll(".button-top")
-
-                button_top.on("click", function() {
-                    d3.select('.button-top-active').classed('button-top-active', false);
-                    d3.select(this).classed('button-top-active', true);
-
-                    update_display(this.id);
-
-                })
 
                 // Update button-row-bottom and overview-block when top buttons are clicked
                 function update_display(button_id){
@@ -395,21 +412,39 @@
                     }
                 }
 
+                /* ADD CLICK FUNCTION TO TOP BUTTONS ====================== */
+                var button_top = d3.selectAll(".button-top")
 
+                button_top.on("click", function() {
+                    d3.select('.button-top-active').classed('button-top-active', false);
+                    d3.select(this).classed('button-top-active', true);
+                    update_display(this.id);
 
-
-
+                    var country_name = d3.select("#overview-country-name").text();
+                    update_toughness_score(country_name, this.textContent);
+                })
 
             }
-
-
-
 
             // Use D3 to load GeoJSON data for Asia
             d3.json("asean.json", draw);
 
-            // Use D3 to load csv data
-            d3.csv("cig_regulation_asia.csv", load);
+            /* LOAD CSV =============================================== */
+            var format = d3.format("%");
+            var data;
+            d3.csv("cig_regulation_asia.csv", function(d) {
+                d['packaging_score'] = format(d['packaging_score']);
+                d['ecig_score'] = format(d['ecig_score']);
+                d['marketing_score'] = format(d['marketing_score']);
+                d['posDisplay_score'] = format(d['posDisplay_score']);
+                d['smokingban_score'] = format(d['smokingban_score']);
+                return d;
+            }, load);
+
+            function load(d){
+                data = d;
+            }
+
 
         </script>
 
