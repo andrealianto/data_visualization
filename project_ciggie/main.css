@@ -99,7 +99,7 @@ button:hover {
     height: 400px;
     margin-right: 4px;
     border: 1px solid #CCCCCC;
-    background-color: #EEEEEE;
+    background-color: white;
 }
 
 #overview-wrapper {
@@ -193,13 +193,20 @@ button:hover {
 
 .country {
     fill: #cb2f27;
-    stroke: black;
+    stroke: #898989;
     stroke-width: 0.7;
     fill-opacity: 1;
 }
 
 
 .selected-country {
-    stroke-width: 1.5;
-    fill-opacity: 0.5 !important;
+    stroke-width: 1.2;
+    stroke: black;
+}
+
+#Brunei,
+#Timor-Leste,
+#Papua-New-Guinea,
+#Solomon-Islands {
+    fill: #EEEEEE !important;
 }
