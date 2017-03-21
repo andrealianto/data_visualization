@@ -470,19 +470,14 @@
 
                         switch(selected_column) {
                             case "no":
-                                current_country.style("fill-opacity", "1");
-                                break;
+                                current_country.style("fill-opacity", "1"); break;
                             case "yes":
-                                current_country.style("fill-opacity", "0");
-                                break;
+                                current_country.style("fill-opacity", "0"); break;
                             case "restricted":
-                                current_country.style("fill-opacity", "0.5");
-                                break;
-                            case "":
-                                current_country.style("fill", "#EEEEEE");
-                                break;
+                                current_country.style("fill-opacity", "0.5"); break;
+                            case "NA":
+                                current_country.style("fill", "#EEEEEE"); break;
                             default:
-                                debugger
                                 current_country.style("fill-opacity", selected_column); break;
 
                         }
@@ -490,7 +485,35 @@
                 }
 
                 function update_map_shading_posdisplay(selected_subcategory) {
+                    data.forEach(function(d) {
+                        current_country = d3.select("#" + d.country);
 
+                        var selected_column;
+
+                        switch(selected_subcategory) {
+                            case "button-overall-posdisplay":
+                                selected_column = d.posDisplay_score; break;
+                            case "button-posban":
+                                selected_column = d.posDisplay_banned; break;
+                            case "button-restrictedarea":
+                                selected_column = d.posDisplay_restrictedArea; break;
+                            case "button-onepack":
+                                selected_column = d.posDisplay_onePackPerBrand; break;
+
+                        }
+
+                        switch(selected_column) {
+                            case "no":
+                                current_country.style("fill-opacity", "0"); break;
+                            case "yes":
+                                current_country.style("fill-opacity", "1"); break;
+                            case "NA":
+                                current_country.style("fill", "#EEEEEE"); break;
+                            default:
+                                current_country.style("fill-opacity", selected_column); break;
+
+                        }
+                    });
                 }
 
                 function update_map_shading_packaging(selected_subcategory) {
@@ -534,23 +557,33 @@
 
                     switch(selected_category) {
                         case "Advertising":
-                            d3.selectAll('.country').style('fill', '#cb2f27');
+                            d3.selectAll('.country')
+                                .style('fill', '#cb2f27')
+                                .style('fill-opacity', '1');
                             update_map_shading_advertising(selected_subcategory);
                             break;
                         case "Point-of-sale Display":
-                            d3.selectAll('.country').style('fill', '#f0bd56');
+                            d3.selectAll('.country')
+                                .style('fill', '#f0bd56')
+                                .style('fill-opacity', "1");
                             update_map_shading_posdisplay(selected_subcategory);
                             break;
                         case "Packaging":
-                            d3.selectAll('.country').style('fill', '#0061a6');
+                            d3.selectAll('.country')
+                                .style('fill', '#0061a6')
+                                .style('fill-opacity', '1');
                             update_map_shading_packaging(selected_subcategory);
                             break;
                         case "Smoking Bans":
-                            d3.selectAll('.country').style('fill', '#87bb40');
+                            d3.selectAll('.country')
+                                .style('fill', '#87bb40')
+                                .style('fill-opacity', '1');
                             update_map_shading_smokingbans(selected_subcategory);
                             break;
                         case "E-cigarettes":
-                            d3.selectAll('.country').style('fill', '#833e98');
+                            d3.selectAll('.country')
+                                .style('fill', '#833e98')
+                                .style('fill-opacity', '1');
                             update_map_shading_ecig(selected_subcategory);
                             break;
                     }
