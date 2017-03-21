@@ -297,13 +297,7 @@
                              .attr("id", function(d) {return d.properties.brk_name;})
                              .attr("class", "country")
                              .attr('d', path)
-                             .on('click', select_country)
-                             .on('mouseover', function() {
-                                d3.select(this). style('fill-opacity', '0.7');
-                             })
-                             .on('mouseout', function() {
-                                d3.selectAll('path').style('fill-opacity', '1');
-                             });
+                             .on('click', select_country);
 
 
                 // Pre-select Indonesia at the start
@@ -321,24 +315,27 @@
                     update_toughness_score(this.id, selected_category);
                 }
 
+                // Update toughness score
                 function update_toughness_score(country_name, selected_category) {
+                    var format = d3.format("%");
+
                     data.forEach(function(d){
                         if(d.country == country_name){
                             switch(selected_category){
                                 case "Advertising":
-                                    d3.select('#toughness-score').text(d.marketing_score);
+                                    d3.select('#toughness-score').text(format(d.marketing_score));
                                     break;
                                 case "Point-of-sale Display":
-                                    d3.select('#toughness-score').text(d.posDisplay_score);
+                                    d3.select('#toughness-score').text(format(d.posDisplay_score));
                                     break;
                                 case "Packaging":
-                                    d3.select('#toughness-score').text(d.packaging_score);
+                                    d3.select('#toughness-score').text(format(d.packaging_score));
                                     break;
                                 case "Smoking Bans":
-                                    d3.select('#toughness-score').text(d.smokingban_score);
+                                    d3.select('#toughness-score').text(format(d.smokingban_score));
                                     break;
                                 case "E-cigarettes":
-                                    d3.select('#toughness-score').text(d.ecig_score);
+                                    d3.select('#toughness-score').text(format(d.ecig_score));
                                     break;
                             }
 
@@ -448,8 +445,72 @@
                     }
                 }
 
+                // Update map shading for Advertising category
+                function update_map_shading_advertising(selected_subcategory) {
+
+                    data.forEach(function(d) {
+                        current_country = d3.select("#" + d.country);
+
+                        var selected_column;
+
+                        switch(selected_subcategory) {
+                            case "button-overall-ads":
+                                selected_column = d.marketing_score; break;
+                            case "button-media":
+                                selected_column = d.marketing_media; break;
+                            case "button-outdoor":
+                                selected_column = d.marketing_outdoor; break;
+                            case "button-sponsorship":
+                                selected_column = d.marketing_event; break;
+                            case "button-freesample":
+                                selected_column = d.marketing_sample; break;
+                            case "button-pos":
+                                selected_column = d.marketing_posAds; break;
+                        }
+
+                        switch(selected_column) {
+                            case "no":
+                                current_country.style("fill-opacity", "1");
+                                break;
+                            case "yes":
+                                current_country.style("fill-opacity", "0");
+                                break;
+                            case "restricted":
+                                current_country.style("fill-opacity", "0.5");
+                                break;
+                            case "":
+                                current_country.style("fill", "#EEEEEE");
+                                break;
+                            default:
+                                debugger
+                                current_country.style("fill-opacity", selected_column); break;
+
+                        }
+                    });
+                }
+
+                function update_map_shading_posdisplay(selected_subcategory) {
+
+                }
+
+                function update_map_shading_packaging(selected_subcategory) {
+
+                }
+
+                function update_map_shading_smokingbans(selected_subcategory) {
+
+                }
+
+                function update_map_shading_ecig(selected_subcategory) {
+
+                }
+
+
+
+
+
                 /* ADD CLICK FUNCTION TO TOP-ROW BUTTONS ==================== */
-                var button_top = d3.selectAll(".button-top")
+                var button_top = d3.selectAll(".button-top");
 
                 button_top.on("click", function() {
                     d3.select('.button-top-active').classed('button-top-active', false);
@@ -458,17 +519,43 @@
 
                     var country_name = d3.select("#overview-country-name").text();
                     update_toughness_score(country_name, this.textContent);
-                })
+                });
 
                 /* ADD CLICK FUNCTION TO BOTTOM-ROW BUTTONS ================ */
-                var button_bottom = d3.selectAll(".button-bottom")
+                var button_bottom = d3.selectAll(".button-bottom");
 
                 button_bottom.on("click", function() {
                     d3.select('.button-bottom-active').classed('button-bottom-active', false);
                     d3.select(this).classed('button-bottom-active', true);
 
-                    d3.select('#article-headline').text(this.textContent);
-                })
+                    // var country_name = d3.select("overview-country-name").text();
+                    var selected_category = d3.select(".button-top-active").text();
+                    var selected_subcategory = this.id;
+
+                    switch(selected_category) {
+                        case "Advertising":
+                            d3.selectAll('.country').style('fill', '#cb2f27');
+                            update_map_shading_advertising(selected_subcategory);
+                            break;
+                        case "Point-of-sale Display":
+                            d3.selectAll('.country').style('fill', '#f0bd56');
+                            update_map_shading_posdisplay(selected_subcategory);
+                            break;
+                        case "Packaging":
+                            d3.selectAll('.country').style('fill', '#0061a6');
+                            update_map_shading_packaging(selected_subcategory);
+                            break;
+                        case "Smoking Bans":
+                            d3.selectAll('.country').style('fill', '#87bb40');
+                            update_map_shading_smokingbans(selected_subcategory);
+                            break;
+                        case "E-cigarettes":
+                            d3.selectAll('.country').style('fill', '#833e98');
+                            update_map_shading_ecig(selected_subcategory);
+                            break;
+                    }
+
+                });
 
             }
 
@@ -476,14 +563,14 @@
             d3.json("asean.json", draw);
 
             /* LOAD CSV =============================================== */
-            var format = d3.format("%");
+            //var format = d3.format("%");
             var data;
             d3.csv("cig_regulation_asia.csv", function(d) {
-                d['packaging_score'] = format(d['packaging_score']);
-                d['ecig_score'] = format(d['ecig_score']);
-                d['marketing_score'] = format(d['marketing_score']);
-                d['posDisplay_score'] = format(d['posDisplay_score']);
-                d['smokingban_score'] = format(d['smokingban_score']);
+                d['packaging_score'] = +d['packaging_score'];
+                d['ecig_score'] = +d['ecig_score'];
+                d['marketing_score'] = +d['marketing_score'];
+                d['posDisplay_score'] = +d['posDisplay_score'];
+                d['smokingban_score'] = +d['smokingban_score'];
                 return d;
             }, load);
 
