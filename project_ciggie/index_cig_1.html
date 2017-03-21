@@ -295,20 +295,25 @@
                              .enter()
                              .append('path')
                              .attr("id", function(d) {return d.properties.brk_name;})
+                             .attr("class", "country")
                              .attr('d', path)
                              .on('click', select_country)
-                             .style('fill', 'white')
-                             .style('stroke', 'black')
-                             .style('stroke-width', 0.5);
+                             .on('mouseover', function() {
+                                d3.select(this). style('fill-opacity', '0.7');
+                             })
+                             .on('mouseout', function() {
+                                d3.selectAll('path').style('fill-opacity', '0.3');
+                             });
+
 
                 // Pre-select Indonesia at the start
-                d3.select('#Indonesia').classed('selected', true);
+                d3.select('#Indonesia').classed('selected-country', true);
 
                 /* FUNCTIONS =============================================== */
                 // Select country on the map
                 function select_country(){
-                    d3.select('.selected').classed('selected', false);
-                    d3.select(this).classed('selected', true);
+                    d3.select('.selected-country').classed('selected-country', false);
+                    d3.select(this).classed('selected-country', true);
                     d3.select('#overview-country-name').text(this.id);
 
                     var selected_category = d3.select('.button-top-active').text();

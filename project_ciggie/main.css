@@ -116,10 +116,12 @@ button:hover {
 
 #overview-toughness-score {
     font: 12px arial;
+    color: #595959;
 }
 
 #toughness-score {
     font: 36px arial;
+    color: black;
     font-weight: bold;
     margin-top: 0;
     margin-bottom: 0;
@@ -189,8 +191,16 @@ button:hover {
     margin-left: 2px;
 }
 
-.selected {
-    stroke-width: 1.5 !important;
-    fill: red !important;
+.country {
+    fill: red;
+    stroke: black;
+    stroke-width: 0.5;
     fill-opacity: 0.5;
+}
+
+
+.selected-country {
+    stroke-width: 1.5;
+    fill: red;
+    fill-opacity: 0.7 !important;
 }
