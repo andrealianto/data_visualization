@@ -31,19 +31,19 @@
 
                     <div id="button-row-bottom-wrapper">
                         <div class="button-row-bottom-active" id="button-row-bottom-advertising">
-                            <button class="button-bottom-active" id="button-overall-ads">Overall</button>
-                            <button class id="button-media">Media</button>
-                            <button class id="button-outdoor">Outdoor</button>
-                            <button class id="button-sponsorship">Sponsorship</button>
-                            <button class id="button-pos">Point-of-sale</button>
-                            <button class id="button-freesample">Free Sample</button>
+                            <button class="button-bottom button-bottom-active" id="button-overall-ads">Overall</button>
+                            <button class="button-bottom" id="button-media">Media</button>
+                            <button class="button-bottom" id="button-outdoor">Outdoor</button>
+                            <button class="button-bottom" id="button-sponsorship">Sponsorship</button>
+                            <button class="button-bottom" id="button-pos">Point-of-sale</button>
+                            <button class="button-bottom" id="button-freesample">Free Sample</button>
                         </div>
 
                         <div id="button-row-bottom-posdisplay">
-                            <button class id="button-overall-posdisplay">Overall</button>
-                            <button class id="button-posban">POS Display Ban</button>
-                            <button class id="button-restrictedarea">Restricted POS Area</button>
-                            <button class id="button-onepack">One Pack Per Brand</button>
+                            <button class="button-bottom" id="button-overall-posdisplay">Overall</button>
+                            <button class="button-bottom" id="button-posban">POS Display Ban</button>
+                            <button class="button-bottom" id="button-restrictedarea">Restricted POS Area</button>
+                            <button class="button-bottom" id="button-onepack">One Pack Per Brand</button>
                         </div>
 
                         <div id="button-row-bottom-packaging">
@@ -302,7 +302,7 @@
                                 d3.select(this). style('fill-opacity', '0.7');
                              })
                              .on('mouseout', function() {
-                                d3.selectAll('path').style('fill-opacity', '0.3');
+                                d3.selectAll('path').style('fill-opacity', '1');
                              });
 
 
@@ -369,6 +369,9 @@
                             d3.select('#button-overall-ads')
                                 .classed('button-bottom-active', true);
 
+                            d3.selectAll('.country')
+                                .style('fill', '#cb2f27');
+
                             break;
 
                         case "button-posdisplay":
@@ -383,6 +386,9 @@
 
                             d3.select('#button-overall-posdisplay')
                                 .classed('button-bottom-active', true);
+
+                            d3.selectAll('.country')
+                                .style('fill', '#f0bd56');
 
                             break;
 
@@ -399,6 +405,9 @@
                             d3.select('#button-overall-packaging')
                                 .classed('button-bottom-active', true);
 
+                            d3.selectAll('.country')
+                                .style('fill', '#0061a6');
+
                             break;
 
                         case "button-smokingbans":
@@ -413,6 +422,9 @@
 
                             d3.select('#button-overall-smokingbans')
                                 .classed('button-bottom-active', true);
+
+                            d3.selectAll('.country')
+                                .style('fill', '#87bb40');
 
                             break;
 
@@ -429,11 +441,14 @@
                             d3.select('#button-overall-ecig')
                                 .classed('button-bottom-active', true);
 
+                            d3.selectAll('.country')
+                                .style('fill', '#833e98');
+
                             break;
                     }
                 }
 
-                /* ADD CLICK FUNCTION TO TOP BUTTONS ====================== */
+                /* ADD CLICK FUNCTION TO TOP-ROW BUTTONS ==================== */
                 var button_top = d3.selectAll(".button-top")
 
                 button_top.on("click", function() {
@@ -443,6 +458,16 @@
 
                     var country_name = d3.select("#overview-country-name").text();
                     update_toughness_score(country_name, this.textContent);
+                })
+
+                /* ADD CLICK FUNCTION TO BOTTOM-ROW BUTTONS ================ */
+                var button_bottom = d3.selectAll(".button-bottom")
+
+                button_bottom.on("click", function() {
+                    d3.select('.button-bottom-active').classed('button-bottom-active', false);
+                    d3.select(this).classed('button-bottom-active', true);
+
+                    d3.select('#article-headline').text(this.textContent);
                 })
 
             }

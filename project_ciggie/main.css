@@ -99,7 +99,7 @@ button:hover {
     height: 400px;
     margin-right: 4px;
     border: 1px solid #CCCCCC;
-    background-color: #595959;
+    background-color: #EEEEEE;
 }
 
 #overview-wrapper {
@@ -192,15 +192,14 @@ button:hover {
 }
 
 .country {
-    fill: red;
+    fill: #cb2f27;
     stroke: black;
-    stroke-width: 0.5;
-    fill-opacity: 0.5;
+    stroke-width: 0.7;
+    fill-opacity: 1;
 }
 
 
 .selected-country {
     stroke-width: 1.5;
-    fill: red;
-    fill-opacity: 0.7 !important;
+    fill-opacity: 0.5 !important;
 }
