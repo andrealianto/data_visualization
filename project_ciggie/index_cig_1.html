@@ -352,6 +352,7 @@
                 function update_display(button_id){
                     d3.select('.button-row-bottom-active').classed('button-row-bottom-active', false);
                     d3.select('.overview-block-active').classed('overview-block-active', false);
+                    d3.select('.button-bottom-active').classed('button-bottom-active', false);
 
                     switch(button_id) {
 
@@ -365,6 +366,9 @@
                             d3.select('#toughness-score-desc')
                                 .text('For cigarette advertising');
 
+                            d3.select('#button-overall-ads')
+                                .classed('button-bottom-active', true);
+
                             break;
 
                         case "button-posdisplay":
@@ -376,6 +380,9 @@
 
                             d3.select('#toughness-score-desc')
                                 .text('For point-of-sale cigarette display');
+
+                            d3.select('#button-overall-posdisplay')
+                                .classed('button-bottom-active', true);
 
                             break;
 
@@ -389,6 +396,9 @@
                             d3.select('#toughness-score-desc')
                                 .text('For cigarette packaging');
 
+                            d3.select('#button-overall-packaging')
+                                .classed('button-bottom-active', true);
+
                             break;
 
                         case "button-smokingbans":
@@ -401,6 +411,9 @@
                             d3.select('#toughness-score-desc')
                                 .text('For smoking bans');
 
+                            d3.select('#button-overall-smokingbans')
+                                .classed('button-bottom-active', true);
+
                             break;
 
                         case "button-ecig":
@@ -412,6 +425,9 @@
 
                             d3.select('#toughness-score-desc')
                                 .text('For e-cigarettes');
+
+                            d3.select('#button-overall-ecig')
+                                .classed('button-bottom-active', true);
 
                             break;
                     }
