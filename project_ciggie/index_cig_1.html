@@ -588,7 +588,36 @@
                 }
 
                 function update_map_shading_ecig(selected_subcategory) {
+                    data.forEach(function(d) {
+                        current_country = d3.select("#" + d.country);
 
+                        var selected_column;
+
+                        switch(selected_subcategory) {
+                            case "button-overall-ecig":
+                                selected_column = d.ecig_score; break;
+                            case "button-import":
+                                selected_column = d.ecig_import_ban; break;
+                            case "button-sales":
+                                selected_column = d.ecig_sales_ban; break;
+                            case "button-possession":
+                                selected_column = d.ecig_possession_ban; break;
+                        }
+
+                        switch(selected_column) {
+                            case "no":
+                                current_country.style("fill-opacity", "0.05"); break;
+                            case "yes":
+                                current_country.style("fill-opacity", "1"); break;
+                            case "restricted":
+                                current_country.style("fill-opacity", "0.5"); break;
+                            case "NA":
+                                current_country.style("fill", "#EEEEEE"); break;
+                            default:
+                                current_country.style("fill-opacity", selected_column); break;
+
+                        }
+                    });
                 }
 
 
