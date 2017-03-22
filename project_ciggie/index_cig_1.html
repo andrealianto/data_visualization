@@ -369,6 +369,8 @@
                             d3.selectAll('.country')
                                 .style('fill', '#cb2f27');
 
+                            update_map_shading_advertising('button-overall-ads');
+
                             break;
 
                         case "button-posdisplay":
@@ -386,6 +388,8 @@
 
                             d3.selectAll('.country')
                                 .style('fill', '#f0bd56');
+
+                            update_map_shading_posdisplay('button-overall-posdisplay');
 
                             break;
 
@@ -405,6 +409,8 @@
                             d3.selectAll('.country')
                                 .style('fill', '#0061a6');
 
+                            update_map_shading_packaging('button-overall-packaging');
+
                             break;
 
                         case "button-smokingbans":
@@ -423,6 +429,8 @@
                             d3.selectAll('.country')
                                 .style('fill', '#87bb40');
 
+                            update_map_shading_smokingbans('button-overall-smokingbans');
+
                             break;
 
                         case "button-ecig":
@@ -440,6 +448,8 @@
 
                             d3.selectAll('.country')
                                 .style('fill', '#833e98');
+
+                            update_map_shading_ecig('button-overall-ecig');
 
                             break;
                     }
