@@ -47,27 +47,27 @@
                         </div>
 
                         <div id="button-row-bottom-packaging">
-                            <button class id="button-overall-packaging">Overall</button>
-                            <button class id="button-plain">Plain Packaging</button>
-                            <button class id="button-pictwarning">Pictorial Warning</button>
-                            <button class id="button-packsize">Pack Size Restriction</button>
+                            <button class="button-bottom" id="button-overall-packaging">Overall</button>
+                            <button class="button-bottom" id="button-plain">Plain Packaging</button>
+                            <button class="button-bottom" id="button-pictwarning">Pictorial Warning</button>
+                            <button class="button-bottom" id="button-packsize">Pack Size Restriction</button>
                         </div>
 
                         <div id="button-row-bottom-smokingbans">
-                            <button class id="button-overall-smokingbans">Overall</button>
-                            <button class id="button-bars">Bars/Restaurants</button>
-                            <button class id="button-office">Offices</button>
-                            <button class id="button-publictransport">Public Transport</button>
-                            <button class id="button-school">Schools</button>
-                            <button class id="button-hospital">Hospitals</button>
-                            <button class id="button-indoor">Indoor Public Area</button>
+                            <button class="button-bottom" id="button-overall-smokingbans">Overall</button>
+                            <button class="button-bottom" id="button-bars">Bars/Restaurants</button>
+                            <button class="button-bottom" id="button-office">Offices</button>
+                            <button class="button-bottom" id="button-publictransport">Public Transport</button>
+                            <button class="button-bottom" id="button-school">Schools</button>
+                            <button class="button-bottom" id="button-hospital">Hospitals</button>
+                            <button class="button-bottom" id="button-indoor">Indoor Public Area</button>
                         </div>
 
                         <div id="button-row-bottom-ecig">
-                            <button class id="button-overall-ecig">Overall</button>
-                            <button class id="button-import">Import</button>
-                            <button class id="button-sales">Sales</button>
-                            <button class id="button-possession">Possession</button>
+                            <button class="button-bottom" id="button-overall-ecig">Overall</button>
+                            <button class="button-bottom" id="button-import">Import</button>
+                            <button class="button-bottom" id="button-sales">Sales</button>
+                            <button class="button-bottom" id="button-possession">Possession</button>
                         </div>
 
                         <div id="button-row-bottom-mask"></div>
@@ -517,7 +517,35 @@
                 }
 
                 function update_map_shading_packaging(selected_subcategory) {
+                    data.forEach(function(d) {
+                        current_country = d3.select("#" + d.country);
 
+                        var selected_column;
+
+                        switch(selected_subcategory) {
+                            case "button-overall-packaging":
+                                selected_column = d.packaging_score; break;
+                            case "button-pictwarning":
+                                selected_column = d.packaging_pictWarning; break;
+                            case "button-plain":
+                                selected_column = d.packaging_plain; break;
+                            case "button-packsize":
+                                selected_column = d.packaging_packSize20; break;
+
+                        }
+
+                        switch(selected_column) {
+                            case "no":
+                                current_country.style("fill", "#595959"); break;
+                            case "yes":
+                                current_country.style("fill-opacity", "1"); break;
+                            case "NA":
+                                current_country.style("fill-opacity", "0"); break;
+                            default:
+                                current_country.style("fill-opacity", selected_column); break;
+
+                        }
+                    });
                 }
 
                 function update_map_shading_smokingbans(selected_subcategory) {
