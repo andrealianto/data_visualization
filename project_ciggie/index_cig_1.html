@@ -342,6 +342,22 @@
                     }
                 }
 
+                // Update marketing bullet upon country selection
+                function color_marketing_bullet(value) {
+                    if(value == "yes") {
+                        return "#a1c9e4";
+                    }
+                    else if (value == "no") {
+                        return "#cb2f27";
+                    }
+                    else if (value == "restricted") {
+                        return "#f0bd56";
+                    }
+                    else {
+                        return "#EEEEEE"
+                    }
+                }
+
                 // Update POS display description upon country selection
                 function update_posDisplay_desc(value) {
                     if(value == "yes") {
@@ -354,6 +370,20 @@
                         return "No law or law is unclear."
                     }
                 }
+
+                // Update POS display bullet upon country selection
+                function color_posDisplay_bullet(value) {
+                    if(value == "yes") {
+                        return "#cb2f27";
+                    }
+                    else if (value == "no") {
+                        return "#a1c9e4";
+                    }
+                    else {
+                        return "#EEEEEE"
+                    }
+                }
+
 
                 // Update packaging description upon country selection
                 function update_packaging_desc(value) {
@@ -373,6 +403,24 @@
                     }
                 }
 
+                // Update packaging bullet upon country selection
+                function color_packaging_bullet(value) {
+                    var format = d3.format("%");
+
+                    if(value == "yes") {
+                        return "#cb2f27";
+                    }
+                    else if (value == "no") {
+                        return "#a1c9e4";
+                    }
+                    else if (value == "NA") {
+                        return "#EEEEEE"
+                    }
+                    else {
+                        return "#cb2f27";
+                    }
+                }
+
                 // Update smoking ban description upon country selection
                 function update_smokingban_desc(value) {
                     if(value == "yes") {
@@ -386,6 +434,22 @@
                     }
                     else {
                         return "Some restrictions apply.";
+                    }
+                }
+
+                // Update smoking ban description upon country selection
+                function color_smokingban_bullet(value) {
+                    if(value == "yes") {
+                        return "#cb2f27";
+                    }
+                    else if (value == "no") {
+                        return "#a1c9e4";
+                    }
+                    else if (value == "NA") {
+                        return "#EEEEEE";
+                    }
+                    else {
+                        return "#f0bd56";
                     }
                 }
 
@@ -405,29 +469,70 @@
                     }
                 }
 
+                // Update e-cigarette bullet upon country selection
+                function color_ecig_bullet(value) {
+                    if(value == "yes") {
+                        return "#cb2f27";
+                    }
+                    else if (value == "no") {
+                        return "#a1c9e4";
+                    }
+                    else if (value == "NA") {
+                        return "#EEEEEE"
+                    }
+                    else {
+                        return "#f0bd56";
+                    }
+                }
+
                 // Update description in overview block
                 function update_overview_block(country_name, selected_category) {
                     data.forEach(function(d) {
                         if(d.country == country_name) {
                             switch(selected_category) {
                                 case "Advertising":
+                                    // Update description
                                     d3.select('#overview-media-desc').text(update_marketing_desc(d.marketing_media));
                                     d3.select('#overview-outdoor-desc').text(update_marketing_desc(d.marketing_outdoor));
                                     d3.select('#overview-sponsorship-desc').text(update_marketing_desc(d.marketing_event));
                                     d3.select('#overview-freesample-desc').text(update_marketing_desc(d.marketing_sample));
                                     d3.select('#overview-pos-desc').text(update_marketing_desc(d.marketing_posAds));
+
+                                    // Update bullet color
+                                    d3.select('#overview-media-bullet').style('background-color', color_marketing_bullet(d.marketing_media));
+                                    d3.select('#overview-outdoor-bullet').style('background-color', color_marketing_bullet(d.marketing_outdoor));
+                                    d3.select('#overview-sponsorship-bullet').style('background-color', color_marketing_bullet(d.marketing_event));
+                                    d3.select('#overview-freesample-bullet').style('background-color', color_marketing_bullet(d.marketing_sample));
+                                    d3.select('#overview-pos-bullet').style('background-color', color_marketing_bullet(d.marketing_posAds));
+
                                     break;
 
                                 case "Point-of-sale Display":
+
+                                    // Update description
                                     d3.select('#overview-posban-desc').text(update_posDisplay_desc(d.posDisplay_banned));
                                     d3.select('#overview-restrictedarea-desc').text(update_posDisplay_desc(d.posDisplay_restrictedArea));
                                     d3.select('#overview-onepack-desc').text(update_posDisplay_desc(d.posDisplay_onePackPerBrand));
+
+                                    // Update bullet color
+                                    d3.select('#overview-posban-bullet').style('background-color', color_posDisplay_bullet(d.posDisplay_banned));
+                                    d3.select('#overview-restrictedarea-bullet').style('background-color', color_posDisplay_bullet(d.posDisplay_restrictedArea));
+                                    d3.select('#overview-onepack-bullet').style('background-color', color_posDisplay_bullet(d.posDisplay_onePackPerBrand));
+
+
                                     break;
 
                                 case "Packaging":
+                                    // Update description
                                     d3.select('#overview-plain-desc').text(update_packaging_desc(d.packaging_plain));
                                     d3.select('#overview-pictwarning-desc').text(update_packaging_desc(d.packaging_pictWarning));
                                     d3.select('#overview-packsize-desc').text(update_packaging_desc(d.packaging_packSize20));
+
+                                    // Update bullet
+                                    d3.select('#overview-plain-bullet').style('background-color', color_packaging_bullet(d.packaging_plain));
+                                    d3.select('#overview-pictwarning-bullet').style('background-color', color_packaging_bullet(d.packaging_pictWarning));
+                                    d3.select('#overview-packsize-bullet').style('background-color', color_packaging_bullet(d.packaging_packSize20));
+
                                     break;
 
                                 case "Smoking Bans":
@@ -437,12 +542,27 @@
                                     d3.select('#overview-school-desc').text(update_smokingban_desc(d.smokingban_school));
                                     d3.select('#overview-hospital-desc').text(update_smokingban_desc(d.smokingban_hospital));
                                     d3.select('#overview-indoor-desc').text(update_smokingban_desc(d.smokingban_indoorPublicPlace));
+
+                                    // Update bullet
+                                    d3.select('#overview-publictransport-bullet').style('background-color', color_smokingban_bullet(d.smokingban_publicTransport));
+                                    d3.select('#overview-bars-bullet').style('background-color', color_smokingban_bullet(d.smokingban_barRestaurant));
+                                    d3.select('#overview-office-bullet').style('background-color', color_smokingban_bullet(d.smokingban_office));
+                                    d3.select('#overview-school-bullet').style('background-color', color_smokingban_bullet(d.smokingban_school));
+                                    d3.select('#overview-hospital-bullet').style('background-color', color_smokingban_bullet(d.smokingban_hospital));
+                                    d3.select('#overview-indoor-bullet').style('background-color', color_smokingban_bullet(d.smokingban_indoorPublicPlace));
+
                                     break;
 
                                 case "E-cigarettes":
+                                    // Update description
                                     d3.select('#overview-ecig-sales-desc').text(update_ecig_desc(d.ecig_sales_ban));
                                     d3.select('#overview-ecig-possession-desc').text(update_ecig_desc(d.ecig_possession_ban));
                                     d3.select('#overview-ecig-import-desc').text(update_ecig_desc(d.ecig_import_ban));
+
+                                    // Update bullet
+                                    d3.select('#overview-ecig-sales-bullet').style('background-color', color_ecig_bullet(d.ecig_sales_ban));
+                                    d3.select('#overview-ecig-possession-bullet').style('background-color', color_ecig_bullet(d.ecig_possession_ban));
+                                    d3.select('#overview-ecig-import-bullet').style('background-color', color_ecig_bullet(d.ecig_import_ban));
                                     break;
                             }
                         }
