@@ -342,7 +342,7 @@
                     }
                 }
 
-                // Update POS display upon country selection
+                // Update POS display description upon country selection
                 function update_posDisplay_desc(value) {
                     if(value == "yes") {
                         return "Yes";
@@ -352,6 +352,24 @@
                     }
                     else {
                         return "No law or law is unclear."
+                    }
+                }
+
+                // Update packaging description upon country selection
+                function update_packaging_desc(value) {
+                    var format = d3.format("%");
+
+                    if(value == "yes") {
+                        return "Yes";
+                    }
+                    else if (value == "no") {
+                        return "No";
+                    }
+                    else if (value == "NA") {
+                        return "No law or law is unclear."
+                    }
+                    else {
+                        return format(value);
                     }
                 }
 
@@ -375,8 +393,13 @@
                                     break;
 
                                 case "Packaging":
+                                    d3.select('#overview-plain-desc').text(update_packaging_desc(d.packaging_plain));
+                                    d3.select('#overview-pictwarning-desc').text(update_packaging_desc(d.packaging_pictWarning));
+                                    d3.select('#overview-packsize-desc').text(update_packaging_desc(d.packaging_packSize20));
                                     break;
+
                                 case "Smoking Bans":
+
                                     break;
                                 case "E-cigarettes":
                                     break;
