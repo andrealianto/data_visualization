@@ -373,6 +373,22 @@
                     }
                 }
 
+                // Update smoking ban description upon country selection
+                function update_smokingban_desc(value) {
+                    if(value == "yes") {
+                        return "Banned.";
+                    }
+                    else if (value == "no") {
+                        return "Allowed.";
+                    }
+                    else if (value == "NA") {
+                        return "No law or law is unclear."
+                    }
+                    else {
+                        return "Some restrictions apply.";
+                    }
+                }
+
                 // Update description in overview block
                 function update_overview_block(country_name, selected_category) {
                     data.forEach(function(d) {
@@ -399,6 +415,12 @@
                                     break;
 
                                 case "Smoking Bans":
+                                    d3.select('#overview-publictransport-desc').text(update_smokingban_desc(d.smokingban_publicTransport));
+                                    d3.select('#overview-bars-desc').text(update_smokingban_desc(d.smokingban_barRestaurant));
+                                    d3.select('#overview-office-desc').text(update_smokingban_desc(d.smokingban_office));
+                                    d3.select('#overview-school-desc').text(update_smokingban_desc(d.smokingban_school));
+                                    d3.select('#overview-hospital-desc').text(update_smokingban_desc(d.smokingban_hospital));
+                                    d3.select('#overview-indoor-desc').text(update_smokingban_desc(d.smokingban_indoorPublicPlace));
 
                                     break;
                                 case "E-cigarettes":
