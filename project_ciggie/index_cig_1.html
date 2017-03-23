@@ -94,7 +94,7 @@
                                 <div class="overview-topic-bullet" id="overview-media-bullet"></div>
                                 <div class="overview-info">
                                     <div class="overview-topic">Media: </div>
-                                    <div class="overview-topic-desc" id="overview-media-desc"> Allowed</div>
+                                    <div class="overview-ads-desc" id="overview-media-desc"> Allowed</div>
                                 </div>
                             </div>
 
@@ -102,7 +102,7 @@
                                 <div class="overview-topic-bullet" id="overview-outdoor-bullet"></div>
                                 <div class="overview-info">
                                     <div class="overview-topic">Outdoor: </div>
-                                    <div class="overview-topic-desc" id="overview-outdoor-desc"> Allowed</div>
+                                    <div class="overview-ads-desc" id="overview-outdoor-desc"> Allowed</div>
                                 </div>
                             </div>
 
@@ -110,7 +110,7 @@
                                 <div class="overview-topic-bullet" id="overview-sponsorship-bullet"></div>
                                 <div class="overview-info">
                                     <div class="overview-topic">Sponsorship: </div>
-                                    <div class="overview-topic-desc" id="overview-sponsorship-desc">Allowed</div>
+                                    <div class="overview-ads-desc" id="overview-sponsorship-desc">Allowed</div>
                                 </div>
                             </div>
 
@@ -118,7 +118,7 @@
                                 <div class="overview-topic-bullet" id="overview-pos-bullet"></div>
                                 <div class="overview-info">
                                     <div class="overview-topic">Point-of-sale: </div>
-                                    <div class="overview-topic-desc" id="overview-pos-desc">Allowed</div>
+                                    <div class="overview-ads-desc" id="overview-pos-desc">Allowed</div>
                                 </div>
                             </div>
 
@@ -126,7 +126,7 @@
                                 <div class="overview-topic-bullet" id="overview-freesample-bullet"></div>
                                 <div class="overview-info">
                                     <div class="overview-topic">Free sample: </div>
-                                    <div class="overview-topic-desc" id="overview-freesample-desc">Allowed</div>
+                                    <div class="overview-ads-desc" id="overview-freesample-desc">Allowed</div>
                                 </div>
                             </div>
                         </div>
@@ -322,7 +322,50 @@
 
                     var selected_category = d3.select('.button-top-active').text();
 
+                    update_overview_block(this.id, selected_category);
                     update_toughness_score(this.id, selected_category);
+                }
+
+                // Update marketing description upon country selection
+                function update_marketing_desc(value) {
+                    if(value == "yes") {
+                        return "Allowed";
+                    }
+                    else if (value == "no") {
+                        return "Banned";
+                    }
+                    else if (value == "restricted") {
+                        return "Some restrictions apply.";
+                    }
+                    else {
+                        return "No law or law is unclear."
+                    }
+
+                }
+
+                // Update description in overview block
+                function update_overview_block(country_name, selected_category) {
+                    data.forEach(function(d) {
+                        if(d.country == country_name) {
+                            switch(selected_category) {
+                                case "Advertising":
+                                    d3.select('#overview-media-desc').text(update_marketing_desc(d.marketing_media));
+                                    d3.select('#overview-outdoor-desc').text(update_marketing_desc(d.marketing_outdoor));
+                                    d3.select('#overview-sponsorship-desc').text(update_marketing_desc(d.marketing_event));
+                                    d3.select('#overview-freesample-desc').text(update_marketing_desc(d.marketing_sample));
+                                    d3.select('#overview-pos-desc').text(update_marketing_desc(d.marketing_posAds));
+                                    break;
+                                case "Point-of-sale Display":
+                                    break;
+                                case "Packaging":
+                                    break;
+                                case "Smoking Bans":
+                                    break;
+                                case "E-cigarettes":
+                                    break;
+                            }
+                        }
+                    })
                 }
 
                 // Update toughness score
