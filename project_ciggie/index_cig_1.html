@@ -261,6 +261,7 @@
 
                         <div id="overview-block-mask"></div>
 
+
                     </div>
 
                 </div>
@@ -304,10 +305,6 @@
                              .on('mouseover', select_country)
                              .on('mouseout', hide_overview);
 
-
-
-                // Pre-select Indonesia at the start
-                d3.select('#Indonesia').classed('selected-country', true);
 
                 /* FUNCTIONS =============================================== */
                 // Hide overview when mouse is out
@@ -493,13 +490,13 @@
 
                         switch(selected_column) {
                             case "no":
-                                current_country.style("fill-opacity", "1"); break;
+                                current_country.style("fill", "#cb2f27").style("fill-opacity", "0.6"); break;
                             case "yes":
-                                current_country.style("fill", "#999999"); break;
+                                current_country.style("fill", "#a1c9e4"); break;
                             case "restricted":
-                                current_country.style("fill-opacity", "0.5"); break;
+                                current_country.style("fill", "#f0bd56"); break;
                             case "NA":
-                                current_country.style("fill", "#EEEEEE"); break;
+                                current_country.style("fill", "#999999"); break;
                             default:
                                 current_country.style("fill-opacity", selected_column); break;
 
@@ -527,11 +524,11 @@
 
                         switch(selected_column) {
                             case "no":
-                                current_country.style("fill", "#999999"); break;
+                                current_country.style("fill", "#a1c9e4"); break;
                             case "yes":
-                                current_country.style("fill-opacity", "1"); break;
+                                current_country.style("fill", "#cb2f27").style("fill-opacity", "0.6"); break;
                             case "NA":
-                                current_country.style("fill", "#EEEEEE"); break;
+                                current_country.style("fill", "#999999"); break;
                             default:
                                 current_country.style("fill-opacity", selected_column); break;
 
@@ -559,11 +556,11 @@
 
                         switch(selected_column) {
                             case "no":
-                                current_country.style("fill", "#999999"); break;
+                                current_country.style("fill", "#a1c9e4"); break;
                             case "yes":
-                                current_country.style("fill-opacity", "1"); break;
+                                current_country.style("fill", "#cb2f27").style("fill-opacity", "0.6"); break;
                             case "NA":
-                                current_country.style("fill", "#EEEEEE"); break;
+                                current_country.style("fill", "#999999"); break;
                             default:
                                 current_country.style("fill-opacity", selected_column); break;
 
@@ -596,13 +593,13 @@
 
                         switch(selected_column) {
                             case "no":
-                                current_country.style("fill", "#999999"); break;
+                                current_country.style("fill", "#a1c9e4"); break;
                             case "yes":
-                                current_country.style("fill-opacity", "1"); break;
+                                current_country.style("fill", "#cb2f27").style("fill-opacity", "0.6"); break;
                             case "restricted":
-                                current_country.style("fill-opacity", "0.5"); break;
+                                current_country.style("fill", "#f0bd56"); break;
                             case "NA":
-                                current_country.style("fill", "#EEEEEE"); break;
+                                current_country.style("fill", "#999999"); break;
                             default:
                                 current_country.style("fill-opacity", selected_column); break;
 
@@ -629,13 +626,13 @@
 
                         switch(selected_column) {
                             case "no":
-                                current_country.style("fill", "#999999"); break;
+                                current_country.style("fill", "#a1c9e4"); break;
                             case "yes":
-                                current_country.style("fill-opacity", "1"); break;
+                                current_country.style("fill", "#cb2f27").style("fill-opacity", "0.6"); break;
                             case "restricted":
-                                current_country.style("fill-opacity", "0.5"); break;
+                                current_country.style("fill", "#f0bd56"); break;
                             case "NA":
-                                current_country.style("fill", "#EEEEEE"); break;
+                                current_country.style("fill", "#999999"); break;
                             default:
                                 current_country.style("fill-opacity", selected_column); break;
 
