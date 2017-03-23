@@ -110,6 +110,14 @@ button:hover {
     padding-left: 7px;
 }
 
+#overview-wrapper-mask {
+    position: absolute;
+    background-color: white;
+    width: 210px;
+    height: 360px;
+    z-index: 3;
+}
+
 #overview-country-name {
     font: 20px georgia;
 }
