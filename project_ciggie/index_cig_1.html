@@ -389,6 +389,22 @@
                     }
                 }
 
+                // Update e-cigarette description upon country selection
+                function update_ecig_desc(value) {
+                    if(value == "yes") {
+                        return "Banned.";
+                    }
+                    else if (value == "no") {
+                        return "Allowed.";
+                    }
+                    else if (value == "NA") {
+                        return "No law or law is unclear."
+                    }
+                    else {
+                        return "Some restrictions apply.";
+                    }
+                }
+
                 // Update description in overview block
                 function update_overview_block(country_name, selected_category) {
                     data.forEach(function(d) {
@@ -421,9 +437,12 @@
                                     d3.select('#overview-school-desc').text(update_smokingban_desc(d.smokingban_school));
                                     d3.select('#overview-hospital-desc').text(update_smokingban_desc(d.smokingban_hospital));
                                     d3.select('#overview-indoor-desc').text(update_smokingban_desc(d.smokingban_indoorPublicPlace));
-
                                     break;
+
                                 case "E-cigarettes":
+                                    d3.select('#overview-ecig-sales-desc').text(update_ecig_desc(d.ecig_sales_ban));
+                                    d3.select('#overview-ecig-possession-desc').text(update_ecig_desc(d.ecig_possession_ban));
+                                    d3.select('#overview-ecig-import-desc').text(update_ecig_desc(d.ecig_import_ban));
                                     break;
                             }
                         }
