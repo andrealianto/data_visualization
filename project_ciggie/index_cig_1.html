@@ -82,7 +82,7 @@
                         <div id="overview-country-name">Indonesia</div>
                         <div id="overview-toughness-score">
                             <p>TOUGHNESS SCORE</p>
-                            <p id="toughness-score">35%</p>
+                            <p id="toughness-score">50%</p>
                             <p id="toughness-score-desc">For cigarette advertising</p>
                         </div>
 
@@ -258,7 +258,12 @@
 
                         <div id="overview-block-mask"></div>
 
+
+
                     </div>
+
+
+
                 </div>
 
             </div>
@@ -297,7 +302,7 @@
                              .attr("id", function(d) {return d.properties.brk_name;})
                              .attr("class", "country")
                              .attr('d', path)
-                             .on('click', select_country);
+                             .on('mouseover', select_country);
 
 
                 // Pre-select Indonesia at the start
@@ -482,7 +487,7 @@
                             case "no":
                                 current_country.style("fill-opacity", "1"); break;
                             case "yes":
-                                current_country.style("fill-opacity", "0.05"); break;
+                                current_country.style("fill", "#999999"); break;
                             case "restricted":
                                 current_country.style("fill-opacity", "0.5"); break;
                             case "NA":
@@ -514,7 +519,7 @@
 
                         switch(selected_column) {
                             case "no":
-                                current_country.style("fill-opacity", "0.05"); break;
+                                current_country.style("fill", "#999999"); break;
                             case "yes":
                                 current_country.style("fill-opacity", "1"); break;
                             case "NA":
@@ -546,7 +551,7 @@
 
                         switch(selected_column) {
                             case "no":
-                                current_country.style("fill-opacity", "0.05"); break;
+                                current_country.style("fill", "#999999"); break;
                             case "yes":
                                 current_country.style("fill-opacity", "1"); break;
                             case "NA":
@@ -583,7 +588,7 @@
 
                         switch(selected_column) {
                             case "no":
-                                current_country.style("fill-opacity", "0.05"); break;
+                                current_country.style("fill", "#999999"); break;
                             case "yes":
                                 current_country.style("fill-opacity", "1"); break;
                             case "restricted":
@@ -616,7 +621,7 @@
 
                         switch(selected_column) {
                             case "no":
-                                current_country.style("fill-opacity", "0.05"); break;
+                                current_country.style("fill", "#999999"); break;
                             case "yes":
                                 current_country.style("fill-opacity", "1"); break;
                             case "restricted":
@@ -629,8 +634,6 @@
                         }
                     });
                 }
-
-
 
 
 
@@ -689,9 +692,7 @@
                             update_map_shading_ecig(selected_subcategory);
                             break;
                     }
-
                 });
-
             }
 
             // Use D3 to load GeoJSON data for Asia
