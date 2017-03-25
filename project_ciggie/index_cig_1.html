@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Project Ciggie</title>
+        <title>Cigarette Regulations in Asia</title>
         <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
         <link href="main.css" rel="stylesheet" type="text/css">
     </head>
@@ -12,10 +12,10 @@
             <div class="header">
                 <h2 id="article-headline">Cigarette Regulations in Asia, Country by Country</h2>
                 <p id="article-description">
-                    Updated 19 March 2017
-                    <br>
-                    <br>
-                    Source: <a href="http://www.tobaccocontrollaws.org/legislation/">Tobacco Control Laws</a>
+                    In Asia, governments have been implementing more tobacco regulations in order to curb smoking. Most of them have also ratified the WHO's Framework Convention of Tobacco Control (FCTC), demonstrating their commitments to reduce the harm caused by smoking in their countires. Nevertheless, FCTC does not guarantee equally stringent measures across different countries. Cigarette regulations remain varied, with some governments being much stricter than the others.
+                </p>
+                <p id="article-date-source">
+                    Published on 26 March 2017. Source: <a href="http://www.tobaccocontrollaws.org/legislation/">Tobacco Control Laws</a>.
                 </p>
             </div>
 
@@ -31,8 +31,7 @@
 
                     <div id="button-row-bottom-wrapper">
                         <div class="button-row-bottom-active" id="button-row-bottom-advertising">
-                            <button class="button-bottom button-bottom-active" id="button-overall-ads">Overall</button>
-                            <button class="button-bottom" id="button-media">Media</button>
+                            <button class="button-bottom button-bottom-active" id="button-media">Media</button>
                             <button class="button-bottom" id="button-outdoor">Outdoor</button>
                             <button class="button-bottom" id="button-sponsorship">Sponsorship</button>
                             <button class="button-bottom" id="button-pos">Point-of-sale</button>
@@ -40,21 +39,18 @@
                         </div>
 
                         <div id="button-row-bottom-posdisplay">
-                            <button class="button-bottom" id="button-overall-posdisplay">Overall</button>
                             <button class="button-bottom" id="button-posban">POS Display Ban</button>
                             <button class="button-bottom" id="button-restrictedarea">Restricted POS Area</button>
                             <button class="button-bottom" id="button-onepack">One Pack Per Brand</button>
                         </div>
 
                         <div id="button-row-bottom-packaging">
-                            <button class="button-bottom" id="button-overall-packaging">Overall</button>
                             <button class="button-bottom" id="button-plain">Plain Packaging</button>
                             <button class="button-bottom" id="button-pictwarning">Pictorial Warning</button>
                             <button class="button-bottom" id="button-packsize">Pack Size Restriction</button>
                         </div>
 
                         <div id="button-row-bottom-smokingbans">
-                            <button class="button-bottom" id="button-overall-smokingbans">Overall</button>
                             <button class="button-bottom" id="button-bars">Bars/Restaurants</button>
                             <button class="button-bottom" id="button-office">Offices</button>
                             <button class="button-bottom" id="button-publictransport">Public Transport</button>
@@ -64,7 +60,6 @@
                         </div>
 
                         <div id="button-row-bottom-ecig">
-                            <button class="button-bottom" id="button-overall-ecig">Overall</button>
                             <button class="button-bottom" id="button-import">Import</button>
                             <button class="button-bottom" id="button-sales">Sales</button>
                             <button class="button-bottom" id="button-possession">Possession</button>
@@ -76,11 +71,24 @@
                 </div>
 
                 <div class="interactive-content">
-                    <div id="asia-map"></div>
+                    <div id="asia-map">
+                        <img src="legend.png" alt="maplegend">
+                    </div>
 
                     <div id="overview-wrapper">
 
-                        <div id="overview-wrapper-mask"></div>
+                        <div id="overview-wrapper-mask">
+                            <div id="how-to-use">How to use this map:</div>
+                            <br>
+                            1. Choose a category and one of its subcategories.
+                            <br>
+                            <br>
+                            2. Hover over the map to learn more about cigarette regulations in different Asian countries.
+                            <div id="legend">
+
+                            </div>
+
+                        </div>
 
                         <div id="overview-country-name">Indonesia</div>
                         <div id="overview-toughness-score">
@@ -309,21 +317,33 @@
                 /* FUNCTIONS =============================================== */
                 // Hide overview when mouse is out
                 function hide_overview() {
-                    d3.select('#overview-wrapper-mask').style('z-index', '3');
+                    d3.select('#overview-wrapper-mask')
+                        .style('z-index', '3')
+                        .style('color', 'black');
                     d3.select('.selected-country').classed('selected-country', false);
                 }
 
                 // Select country on the map
                 function select_country(){
-                    d3.select('.selected-country').classed('selected-country', false);
-                    d3.select(this).classed('selected-country', true);
-                    d3.select('#overview-country-name').text(this.id);
-                    d3.select('#overview-wrapper-mask').style('z-index', '-2');
+                    country = this.id;
 
-                    var selected_category = d3.select('.button-top-active').text();
+                    if (country == "Timor-Leste" || country == "Papua-New-Guinea" || country == "Brunei") {
+                        return;
+                    }
+                    else {
+                        d3.select('.selected-country').classed('selected-country', false);
+                        d3.select(this).classed('selected-country', true);
+                        d3.select('#overview-country-name').text(this.id);
+                        d3.select('#overview-wrapper-mask')
+                            .style('z-index', '-2')
+                            .style('color','white');
 
-                    update_overview_block(this.id, selected_category);
-                    update_toughness_score(this.id, selected_category);
+                        var selected_category = d3.select('.button-top-active').text();
+
+                        update_overview_block(this.id, selected_category);
+                        update_toughness_score(this.id, selected_category);
+                    }
+
                 }
 
                 // Update marketing description upon country selection
@@ -348,13 +368,13 @@
                         return "#a1c9e4";
                     }
                     else if (value == "no") {
-                        return "#cb2f27";
+                        return "#d97b76";
                     }
                     else if (value == "restricted") {
                         return "#f0bd56";
                     }
                     else {
-                        return "#EEEEEE"
+                        return "#999999"
                     }
                 }
 
@@ -374,13 +394,13 @@
                 // Update POS display bullet upon country selection
                 function color_posDisplay_bullet(value) {
                     if(value == "yes") {
-                        return "#cb2f27";
+                        return "#d97b76";
                     }
                     else if (value == "no") {
                         return "#a1c9e4";
                     }
                     else {
-                        return "#EEEEEE"
+                        return "#999999"
                     }
                 }
 
@@ -408,16 +428,16 @@
                     var format = d3.format("%");
 
                     if(value == "yes") {
-                        return "#cb2f27";
+                        return "#d97b76";
                     }
                     else if (value == "no") {
                         return "#a1c9e4";
                     }
                     else if (value == "NA") {
-                        return "#EEEEEE"
+                        return "#999999"
                     }
                     else {
-                        return "#cb2f27";
+                        return "#d97b76";
                     }
                 }
 
@@ -440,13 +460,13 @@
                 // Update smoking ban description upon country selection
                 function color_smokingban_bullet(value) {
                     if(value == "yes") {
-                        return "#cb2f27";
+                        return "#d97b76";
                     }
                     else if (value == "no") {
                         return "#a1c9e4";
                     }
                     else if (value == "NA") {
-                        return "#EEEEEE";
+                        return "#999999";
                     }
                     else {
                         return "#f0bd56";
@@ -472,13 +492,13 @@
                 // Update e-cigarette bullet upon country selection
                 function color_ecig_bullet(value) {
                     if(value == "yes") {
-                        return "#cb2f27";
+                        return "#d97b76";
                     }
                     else if (value == "no") {
                         return "#a1c9e4";
                     }
                     else if (value == "NA") {
-                        return "#EEEEEE"
+                        return "#999999"
                     }
                     else {
                         return "#f0bd56";
@@ -617,13 +637,10 @@
                             d3.select('#toughness-score-desc')
                                 .text('For cigarette advertising');
 
-                            d3.select('#button-overall-ads')
+                            d3.select('#button-media')
                                 .classed('button-bottom-active', true);
 
-                            d3.selectAll('.country')
-                                .style('fill', '#cb2f27');
-
-                            update_map_shading_advertising('button-overall-ads');
+                            update_map_shading_advertising('button-media');
 
                             break;
 
@@ -637,13 +654,10 @@
                             d3.select('#toughness-score-desc')
                                 .text('For point-of-sale cigarette display');
 
-                            d3.select('#button-overall-posdisplay')
+                            d3.select('#button-posban')
                                 .classed('button-bottom-active', true);
 
-                            d3.selectAll('.country')
-                                .style('fill', '#f0bd56');
-
-                            update_map_shading_posdisplay('button-overall-posdisplay');
+                            update_map_shading_posdisplay('button-posban');
 
                             break;
 
@@ -657,13 +671,10 @@
                             d3.select('#toughness-score-desc')
                                 .text('For cigarette packaging');
 
-                            d3.select('#button-overall-packaging')
+                            d3.select('#button-plain')
                                 .classed('button-bottom-active', true);
 
-                            d3.selectAll('.country')
-                                .style('fill', '#0061a6');
-
-                            update_map_shading_packaging('button-overall-packaging');
+                            update_map_shading_packaging('button-plain');
 
                             break;
 
@@ -677,13 +688,10 @@
                             d3.select('#toughness-score-desc')
                                 .text('For smoking bans');
 
-                            d3.select('#button-overall-smokingbans')
+                            d3.select('#button-bars')
                                 .classed('button-bottom-active', true);
 
-                            d3.selectAll('.country')
-                                .style('fill', '#87bb40');
-
-                            update_map_shading_smokingbans('button-overall-smokingbans');
+                            update_map_shading_smokingbans('button-bars');
 
                             break;
 
@@ -697,13 +705,10 @@
                             d3.select('#toughness-score-desc')
                                 .text('For e-cigarettes');
 
-                            d3.select('#button-overall-ecig')
+                            d3.select('#button-import')
                                 .classed('button-bottom-active', true);
 
-                            d3.selectAll('.country')
-                                .style('fill', '#833e98');
-
-                            update_map_shading_ecig('button-overall-ecig');
+                            update_map_shading_ecig('button-import');
 
                             break;
                     }
@@ -714,12 +719,11 @@
 
                     data.forEach(function(d) {
                         current_country = d3.select("#" + d.country);
+                        current_country.style("fill-opacity", "1");
 
                         var selected_column;
 
                         switch(selected_subcategory) {
-                            case "button-overall-ads":
-                                selected_column = d.marketing_score; break;
                             case "button-media":
                                 selected_column = d.marketing_media; break;
                             case "button-outdoor":
@@ -734,7 +738,7 @@
 
                         switch(selected_column) {
                             case "no":
-                                current_country.style("fill", "#cb2f27").style("fill-opacity", "0.6"); break;
+                                current_country.style("fill", "#d97b76"); break;
                             case "yes":
                                 current_country.style("fill", "#a1c9e4"); break;
                             case "restricted":
@@ -748,15 +752,15 @@
                     });
                 }
 
+                // Update map shading for POS Display category
                 function update_map_shading_posdisplay(selected_subcategory) {
                     data.forEach(function(d) {
                         current_country = d3.select("#" + d.country);
+                        current_country.style("fill-opacity", "1");
 
                         var selected_column;
 
                         switch(selected_subcategory) {
-                            case "button-overall-posdisplay":
-                                selected_column = d.posDisplay_score; break;
                             case "button-posban":
                                 selected_column = d.posDisplay_banned; break;
                             case "button-restrictedarea":
@@ -770,7 +774,7 @@
                             case "no":
                                 current_country.style("fill", "#a1c9e4"); break;
                             case "yes":
-                                current_country.style("fill", "#cb2f27").style("fill-opacity", "0.6"); break;
+                                current_country.style("fill", "#d97b76"); break;
                             case "NA":
                                 current_country.style("fill", "#999999"); break;
                             default:
@@ -780,15 +784,15 @@
                     });
                 }
 
+                // Update map shading for Packaging category
                 function update_map_shading_packaging(selected_subcategory) {
                     data.forEach(function(d) {
                         current_country = d3.select("#" + d.country);
+                        current_country.style("fill-opacity", "1");
 
                         var selected_column;
 
                         switch(selected_subcategory) {
-                            case "button-overall-packaging":
-                                selected_column = d.packaging_score; break;
                             case "button-pictwarning":
                                 selected_column = d.packaging_pictWarning; break;
                             case "button-plain":
@@ -802,25 +806,26 @@
                             case "no":
                                 current_country.style("fill", "#a1c9e4"); break;
                             case "yes":
-                                current_country.style("fill", "#cb2f27").style("fill-opacity", "0.6"); break;
+                                current_country.style("fill", "#d97b76"); break;
                             case "NA":
                                 current_country.style("fill", "#999999"); break;
                             default:
-                                current_country.style("fill-opacity", selected_column); break;
+                                current_country.style("fill-opacity", selected_column)
+                                    .style("fill", "d97b76"); break;
 
                         }
                     });
                 }
 
+                // Update map shading for Smoking Bans category
                 function update_map_shading_smokingbans(selected_subcategory) {
                     data.forEach(function(d) {
                         current_country = d3.select("#" + d.country);
+                        current_country.style("fill-opacity", "1");
 
                         var selected_column;
 
                         switch(selected_subcategory) {
-                            case "button-overall-smokingbans":
-                                selected_column = d.smokingban_score; break;
                             case "button-bars":
                                 selected_column = d.smokingban_barRestaurant; break;
                             case "button-office":
@@ -839,7 +844,7 @@
                             case "no":
                                 current_country.style("fill", "#a1c9e4"); break;
                             case "yes":
-                                current_country.style("fill", "#cb2f27").style("fill-opacity", "0.6"); break;
+                                current_country.style("fill", "#d97b76"); break;
                             case "restricted":
                                 current_country.style("fill", "#f0bd56"); break;
                             case "NA":
@@ -851,15 +856,15 @@
                     });
                 }
 
+                // Update map shading for E-Cigarette category
                 function update_map_shading_ecig(selected_subcategory) {
                     data.forEach(function(d) {
                         current_country = d3.select("#" + d.country);
+                        current_country.style("fill-opacity", "1");
 
                         var selected_column;
 
                         switch(selected_subcategory) {
-                            case "button-overall-ecig":
-                                selected_column = d.ecig_score; break;
                             case "button-import":
                                 selected_column = d.ecig_import_ban; break;
                             case "button-sales":
@@ -872,7 +877,7 @@
                             case "no":
                                 current_country.style("fill", "#a1c9e4"); break;
                             case "yes":
-                                current_country.style("fill", "#cb2f27").style("fill-opacity", "0.6"); break;
+                                current_country.style("fill", "#d97b76"); break;
                             case "restricted":
                                 current_country.style("fill", "#f0bd56"); break;
                             case "NA":
@@ -883,8 +888,6 @@
                         }
                     });
                 }
-
-
 
                 /* ADD CLICK FUNCTION TO TOP-ROW BUTTONS ==================== */
                 var button_top = d3.selectAll(".button-top");
@@ -942,7 +945,11 @@
                             break;
                     }
                 });
+
+                // Set initial state of the map
+                update_map_shading_advertising("button-media");
             }
+
 
             // Use D3 to load GeoJSON data for Asia
             d3.json("asean.json", draw);
@@ -963,6 +970,7 @@
                 data = d;
             }
 
+            update_display("button-advertising");
 
         </script>
 
