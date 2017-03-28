@@ -23,24 +23,17 @@
             </div>
         </div>
 
-        <div id="graphic"></div>
+        <div id="graphic">
+            <h2 id="chart-title">Mathematics</h2>
+            <p id="chart-desc">Clearly, an OECD status is not a good indication of student's competency in mathematics. In fact, non-OECD countries such as Shanghai, Singapore, Hong Kong, Taipei, Macao, Liechtenstein, and Vietnam outperformed many of their OECD peers.</p>
+            <img src="legend.png" alt="oecdlegend">
+        </div>
+
     </div>
 
     <script type="text/javascript">
         function draw(data) {
             "use strict";
-
-            // Add chart title
-            d3.select("#graphic")
-                .append("h2")
-                .attr("id","chart-title")
-                .text("Mathematics");
-
-            // Add chart description
-            d3.select("#graphic")
-                .append("p")
-                .attr("id", "chart-desc")
-                .text("Clearly, an OECD status is not a good indication of student's competency in mathematics. In fact, non-OECD countries such as Shanghai, Singapore, Hong Kong, Taipei, Macao, Liechtenstein, and Vietnam outperformed many of their OECD peers.")
 
             // Sort bars based on value
             data = data.sort(function (a,b){
