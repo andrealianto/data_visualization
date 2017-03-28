@@ -20,7 +20,7 @@ I decided to add a legend just below the chart description so that it's easier f
 
 ### Feedback #3: 
 For countries you want to emphasize, it would be nice if you could make their names bold. It would make me easier to verify your conclusions.
-### Commment:
+### Comment:
 I decided not to incorporate this feedback in the final index.html file to minimize clutter in the visualisation.
 
 # Sources
