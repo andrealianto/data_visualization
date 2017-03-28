@@ -107,12 +107,15 @@
                 }
             }
 
+            // Format numbers to 2 decimal places only
+            var format = d3.format(",.2f");
+
             // Create tool tip
             var tip = d3.tip()
                 .attr('class', 'd3-tip')
                 .offset([-10, 0])
                 .html(function(d) {
-                    return "<strong>" + d.CNT + " (" + d.OECD + ") | Math Score:</strong> <span>" + d.MATHAVE + "</span>";
+                    return "<strong>" + d.CNT + " (" + d.OECD + ") | Math Score:</strong> <span>" + format(d.MATHAVE) + "</span>";
                 })
 
             svg.call(tip);
@@ -179,7 +182,7 @@
 
                         // Update tool tip
                         tip.html(function(d) {
-                            return "<strong>" + d.CNT + " (" + d.OECD + ") | Math Score:</strong> <span>" + d.MATHAVE + "</span>";
+                            return "<strong>" + d.CNT + " (" + d.OECD + ") | Math Score:</strong> <span>" + format(d.MATHAVE) + "</span>";
                         })
 
                         svg.call(tip);
@@ -217,7 +220,7 @@
 
                         // Update tool tip
                         tip.html(function(d) {
-                            return "<strong>" + d.CNT + " (" + d.OECD + ") | Reading Score:</strong> <span>" + d.READAVE + "</span>";
+                            return "<strong>" + d.CNT + " (" + d.OECD + ") | Reading Score:</strong> <span>" + format(d.READAVE) + "</span>";
                         })
 
                         svg.call(tip);
@@ -250,7 +253,7 @@
 
                         // Update tool tip
                         tip.html(function(d) {
-                            return "<strong>" + d.CNT + " (" + d.OECD + ") | Science Score:</strong> <span>" + d.SCIEAVE + "</span>";
+                            return "<strong>" + d.CNT + " (" + d.OECD + ") | Science Score:</strong> <span>" + format(d.SCIEAVE) + "</span>";
                         })
 
                         svg.call(tip);
